@@ -4,6 +4,8 @@
 \RequirePackage{xcolor} %Pacote para cores
 \RequirePackage{xparse} %Pacote para argumentos opcionais
 \RequirePackage[most]{tcolorbox} %cria as seções
+\RequirePackage{multicol} % Pacote para várias colunas
+\RequirePackage{geometry} % Modifica dimensões da página
 
 % IMPORTANTE: SE TIVER COM DÚVIDA NO CÓDIGO, FALAR COMIGO (BRUNO).
 % CRIEM BRANCHS SEPARADAS 
@@ -57,18 +59,16 @@
     \colorlet{MainColor}{black}
     \colorlet{TextColor}{white}
     \colorlet{BackgroundColor}{black}
-    \colorlet{TitleBackgroundColor}{black}
-    \colorlet{TextBackgroundColor}{black}
+    \colorlet{TitleBackgroundColor}{gray}
+    \colorlet{TextBackgroundColor}{black!80}
 }
 
 \ProcessOptions\relax % Processa as options
 
 % SEÇÃO 2 - CRIAR SEÇÕES E A ESTRUTURA BASE DAS SEÇÕES
 % ----------IGOR ----------- faça as seguinte modificações
-% Use a classe article para implementar estrutura de coluna, Título referências
-% Deixe o o poster em uma página (não sei se da)
-% conserte o darkmode, faço com que ao dar o comando \documentclass[darkmode]{poster_text} 
-% tire a númeração da página
+
+
 
 % Definição do ambiente para o time implementar
 % Argumentos:
@@ -102,6 +102,29 @@
     \end{tcolorbox}
 }
 
+\AtBeginDocument{
+    \pagecolor{BackgroundColor} % Aplica a cor da página para o darkmode funcionar
+    \color{TextColor}
+    \renewcommand{\refname}{Referências} % Mantém em português
+}
+
+% Personaliza o título
+\makeatletter
+\renewcommand{\maketitle}{
+    \begin{center}
+        {\Huge\bfseries \color{TextColor} \@title \par}
+        \vspace{1em}
+        {\Large \color{TextColor} \@author \par}
+        \vspace{0.5em}
+        {\large \color{TextColor} \@date \par}
+    \end{center}
+    \vspace{2em}
+}
+\makeatother
+
+% Remove a numeração de página
+\pagenumbering{gobble}
+
 %FORMATAÇÃO MEXER DEPOIS
 
 \setlength{\paperwidth}{210mm}
@@ -113,6 +136,5 @@
 \setlength{\evensidemargin}{0pt}
 \setlength{\headheight}{30pt}
 \setlength{\headsep}{30pt}
-
 
 \endinput
