@@ -8,9 +8,15 @@
 \author{Bruno Pereira}
 \date{2026}
 
+
+
 \begin{document}
 
+\begin{samepage} % Força página única
+
 \maketitle
+
+\begin{multicols}{2} % Define quantidade de colunas
 
 \begin{postercard}{Introdução}
 Este é um exemplo de seção usando a classe ImpaTeXPoster.
@@ -39,5 +45,24 @@ Mostrar como usar diferentes cores no ambiente.
 
 \lipsum[4]
 \end{postercard}
+
+% Referências
+\begin{thebibliography}{99}
+
+\bibitem{popper}
+POPPER, Karl.
+\textit{A lógica da pesquisa científica}.
+São Paulo: Cultrix, 2002.
+
+\bibitem{chalmers}
+CHALMERS, A. F.
+\textit{O que é ciência, afinal?}
+São Paulo: Brasiliense, 1999.
+
+\end{thebibliography}
+
+\end{multicols}
+
+\end{samepage}
 
 \end{document}
