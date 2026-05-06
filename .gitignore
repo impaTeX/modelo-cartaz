@@ -5,6 +5,7 @@
 *.synctex.gz
 *.toc
 *.out
+!*.pdf
 
 node_modules/
 vendor/
@@ -16,5 +17,3 @@ Thumbs.db
 
 dist/
 build/
-
-!*.pdf
