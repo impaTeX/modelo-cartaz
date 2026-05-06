@@ -1,11 +1,35 @@
-\documentclass[darkmode]{impaTeXPoster}
+\documentclass[orangemode]{impaTeXPoster} 
+
+
+% ==================================================
+% Opções de modo da classe
+% ==================================================
+% A classe permite combinar múltiplos modos de estilo.
+%
+% Modos disponíveis:
+% - simplemode : bege como cor principal
+% - minimalmode: apenas branco e preto
+% - darkmode   : ativa o tema escuro (pode ser combinado como outros modos)
+% - pinkmode   : usa a paleta rosa
+% - yellowmode : usa a paleta amarela
+% - orangemode : usa a paleta laranja
+% - greenmode  : usa a paleta verde
+%
+% Uso:
+% \documentclass[pinkmode,darkmode]{impaTeXPoster}
+%
+% Funcionamento:
+% - Modos de cor (pink, green, etc.) definem a paleta principal.
+% - O darkmode ajusta o fundo e o contraste do texto.
+% ==================================================
+
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{lipsum} % só pra texto de exemplo
 
 \title{Poster Teste}
-\author{Bruno Pereira}
+\author{Maria Eduarda}
 \date{2026}
 
 
@@ -34,7 +58,7 @@ Mostrar como usar diferentes cores no ambiente.
 
 \vspace{1em}
 
-\begin{postercard}[green][pinkEx1][black]{Resultados}
+\begin{postercard}[green][pink50][black]{Resultados}
 
 \lipsum[3]
 \end{postercard}
@@ -52,7 +76,7 @@ Mostrar como usar diferentes cores no ambiente.
 \bibitem{popper}
 POPPER, Karl.
 \textit{A lógica da pesquisa científica}.
-São Paulo: Cultrix, 2002.
+São Paulo: Cultrix, 2002.u
 
 \bibitem{chalmers}
 CHALMERS, A. F.
