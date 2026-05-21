@@ -1,109 +1,60 @@
-\documentclass[palette=basic, mode=dark]{impaTeXPoster}
-
-
-% ==================================================
-% Opções da classe
-% ==================================================
-%
-% A classe suporta dois sistemas principais de customização:
-%    palette = define a identidade visual dos cards gerados por padrão
-%              (independentemente da pallete escolhida é possivel forçar outras cores de cards
-%               ao usar o poster card com cores pré-definidas, ver exmplos no documento)
-%    mode    = controla o estilo global da interface (claro/escuro)
-%
-% --------------------------------------------------
-% PALETTES DISPONÍVEIS
-% --------------------------------------------------
-%
-% palette = none,
-%           green,
-%           pink,
-%           orange,
-%           yellow,
-%           basic
-%
-% --------------------------------------------------
-% MODOS DISPONÍVEIS
-% --------------------------------------------------
-%   mode = light, dark
-%
-% SINTA-SE LIVRE PARA TESTAR AS COMBINAÇÕES!
-% ==================================================
-
+\documentclass[palette=green, mode=dark]{impaTeXPoster}
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{lipsum} % só pra texto de exemplo
+\usepackage{lipsum}
+
 
 \title{Poster Teste}
-\author{Maria Eduarda}
+\author{Bruno Pereira}
+\institute{IMPA Tech}
 \date{2026}
 
 \begin{document}
 
-\begin{samepage} % Força página única
-
 \maketitle
 
-\begin{multicols}{2} % Define quantidade de colunas
-% ==================================================
-% EXEMPLO 1 — CARD PADRÃO
-% Usa automaticamente a palette escolhida
-% ==================================================
+% Usando o multicols (carregado pela classe) para dividir o poster em 2 colunas
+\begin{multicols}{2}
 
-\begin{postercard}{Introdução}
+% ================= LEFT COLUMN =================
 
-Este card utiliza automaticamente as cores definidas pela combinação de
-\texttt{palette} e \texttt{mode} da classe.
+\begin{postercard}[green][green!20]{Introdução}
+Este é um exemplo de seção usando a classe ImpaTeXPoster.
 
 \lipsum[1]
-
 \end{postercard}
 
-\vspace{1em}
-
-% ==================================================
-% EXEMPLO 2 — CARD CUSTOMIZADO
-% Ignora a palette da classe
-% ==================================================
-
-\begin{postercard}[orange][yellow50][black]{Objetivo}
-
-Este card utiliza cores definidas manualmente pelo usuário, independentemente
-da palette global da classe.
+\begin{postercard}[green][green!20][yellow]{Objetivo}
+Mostrar como usar diferentes cores no ambiente.
 
 \lipsum[2]
-
 \end{postercard}
 
-\vspace{1em}
 
+% ================= RIGHT COLUMN =================
+% O multicol gerencia a quebra de coluna automaticamente, 
+% mas você pode forçar a quebra com \columnbreak se achar necessário.
+\columnbreak 
 
-\vspace{1em}
-
-\begin{postercard}[green][pink50][black]{Resultados}
-
+\begin{postercard}{Resultados}
 \lipsum[3]
 \end{postercard}
 
-\vspace{1em}
-
-\begin{postercard}{Conclusão}
-
-O comportamento visual deste card muda automaticamente quando
-\texttt{mode=dark} é ativado.
-
+% Este card usará: 
+% Fundo do título=black, Fundo do card=black!85, Texto do título=white, Texto do conteúdo=pink
+\begin{postercard}[black][black!85][white][pink]{Resultados}
 \lipsum[4]
-
 \end{postercard}
 
-% Referências
+\begin{postercard}{Referências}
+
 \begin{thebibliography}{99}
 
 \bibitem{popper}
 POPPER, Karl.
 \textit{A lógica da pesquisa científica}.
-São Paulo: Cultrix, 2002.u
+São Paulo: Cultrix, 2002.
 
 \bibitem{chalmers}
 CHALMERS, A. F.
@@ -112,8 +63,8 @@ São Paulo: Brasiliense, 1999.
 
 \end{thebibliography}
 
-\end{multicols}
+\end{postercard}
 
-\end{samepage}
+\end{multicols}
 
 \end{document}

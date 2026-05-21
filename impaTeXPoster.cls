@@ -1,12 +1,11 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{impaTeXPoster}[2026/04/20 My Custom LaTeX Class]
+\ProvidesClass{impaTeXPoster}[2026/04/20 My Custom LaTeX Class - Combined Version]
 
 \LoadClass{article}
 
 % ==================================================
 % PACKAGES
 % ==================================================
-
 \RequirePackage{xcolor}
 \RequirePackage{xparse}
 \RequirePackage[most]{tcolorbox}
@@ -18,7 +17,6 @@
 % ==================================================
 % OPTIONS SYSTEM
 % ==================================================
-
 \SetupKeyvalOptions{
     family=impa,
     prefix=impa@
@@ -30,54 +28,25 @@
 \ProcessKeyvalOptions*
 
 % ==================================================
-% BASE COLORS
+% BASE COLORS & THEMES (MARIA'S SPECTRUM)
 % ==================================================
-
 \definecolor{white}{HTML}{F3F3F3}
 \definecolor{black}{HTML}{000000}
-
 \definecolor{beige}{HTML}{CCC4AF}
 \definecolor{pink}{HTML}{FF8AEF}
 \definecolor{orange}{HTML}{FFC555}
 \definecolor{yellow}{HTML}{ECF47A}
 \definecolor{green}{HTML}{BEFF88}
 
-% IMPORTANTE: SE TIVER COM DÚVIDA NO CÓDIGO, FALAR COMIGO (BRUNO).
-% CRIEM BRANCHS SEPARADAS 
-% VAI TER MENSAGENS AO LOGO DO TEXTO, COMO SEU NOME (IGOR OU MARIA) E ALGUMA INSTRUÇÃO
-% MARIA VAI TER FOCO NA ESTÉTICA, E IGOR NA ESTRUTURA
-% Mantenham em inglês
-
-% SEÇÃO 1 DEFINIÇÃO DE TEMAS E DEFINIÇÂO DAS CORES USADAS
-
-% Definição de cores base (HEX ou RGB)
-\definecolor{beige}{HTML}{CCC4AF}
-\definecolor{white}{HTML}{F3F3F3}
-\definecolor{black}{HTML}{000000}
-\definecolor{pink}{HTML}{FF8AEF}
-\definecolor{orange}{HTML}{FFC555}
-\definecolor{yellow}{HTML}{ECF47A}
-\definecolor{green}{HTML}{BEFF88}
-
-% Definição de cores extendidas
-% ------------------- MARIA extende o espectro de cores de acordo com as  diretrizes -----------
-
-% Definindo paleta de cores do impatech estendida
-
-% =========================
-% PINK
-% =========================
+% PINK EXTENSION
 \definecolor{pink50}{HTML}{F7BEF4}
 \definecolor{pink75}{HTML}{F59FED}
-\definecolor{pink100}{HTML}{FF8AEF} % já definida, mas se alguém tentar usar assim vai funcionar!
+\definecolor{pink100}{HTML}{FF8AEF}
 \definecolor{pink200}{HTML}{F073E0}
 \definecolor{pink300}{HTML}{E35DD4}
 \definecolor{pink400}{HTML}{D646C7}
 
-
-% =========================
-% YELLOW
-% =========================
+% YELLOW EXTENSION
 \definecolor{yellow50}{HTML}{F7F7B2}
 \definecolor{yellow75}{HTML}{F5F79B}
 \definecolor{yellow100}{HTML}{ECF47A}
@@ -85,9 +54,7 @@
 \definecolor{yellow300}{HTML}{EDEE40}
 \definecolor{yellow400}{HTML}{EEEA24}
 
-% =========================
-% ORANGE
-% =========================
+% ORANGE EXTENSION
 \definecolor{orange50}{HTML}{F7D296}
 \definecolor{orange75}{HTML}{F7CB80}
 \definecolor{orange100}{HTML}{FFC555}
@@ -95,9 +62,7 @@
 \definecolor{orange300}{HTML}{F9AA41}
 \definecolor{orange400}{HTML}{FCA72B}
 
-% =========================
-% GREEN
-% =========================
+% GREEN EXTENSION
 \definecolor{green50}{HTML}{DEF7C5}
 \definecolor{green75}{HTML}{D1FAAF}
 \definecolor{green100}{HTML}{BDF58B}
@@ -105,80 +70,41 @@
 \definecolor{green300}{HTML}{91F340}
 \definecolor{green400}{HTML}{7BEE1B}
 
-
-
-% Cores Funcionais Padrão
+% Functional Color Defaults
 \colorlet{MainColor}{beige}
 \colorlet{TextColor}{black}
 \colorlet{BackgroundColor}{white}
 \colorlet{MainTitle}{black}
-
-
-% ==================================================
-% DEFAULT FUNCTIONAL COLORS
-% ==================================================
-
-\colorlet{MainColor}{beige}
-\colorlet{TextColor}{black}
-\colorlet{BackgroundColor}{white}
-\colorlet{MainTitle}{black}
-
 \colorlet{TitleBackgroundColor}{beige}
 \colorlet{TextBackgroundColor}{beige}
 
-
 % ==================================================
-% PALETTES
+% PALETTES CONFIGURATION
 % ==================================================
-
-% -------------------------
-% BASIC
-% -------------------------
-
 \ifthenelse{\equal{\impa@palette}{basic}}{
     \colorlet{TitleBackgroundColor}{beige}
     \colorlet{TextBackgroundColor}{beige}
 }{}
-
-% -------------------------
-% GREEN
-% -------------------------
 
 \ifthenelse{\equal{\impa@palette}{green}}{
     \colorlet{TitleBackgroundColor}{green}
     \colorlet{TextBackgroundColor}{green50}
 }{}
 
-% -------------------------
-% PINK
-% -------------------------
-
 \ifthenelse{\equal{\impa@palette}{pink}}{
     \colorlet{TitleBackgroundColor}{pink}
     \colorlet{TextBackgroundColor}{pink50}
 }{}
-
-% -------------------------
-% ORANGE
-% -------------------------
 
 \ifthenelse{\equal{\impa@palette}{orange}}{
     \colorlet{TitleBackgroundColor}{orange}
     \colorlet{TextBackgroundColor}{orange50}
 }{}
 
-% -------------------------
-% YELLOW
-% -------------------------
-
 \ifthenelse{\equal{\impa@palette}{yellow}}{
     \colorlet{TitleBackgroundColor}{yellow}
     \colorlet{TextBackgroundColor}{yellow50}
 }{}
-
-% -------------------------
-% NONE
-% -------------------------
 
 \ifthenelse{\equal{\impa@palette}{none}}{
     \colorlet{TitleBackgroundColor}{white}
@@ -187,112 +113,101 @@
 }{}
 
 % ==================================================
-% MODE SYSTEM
+% MODE SYSTEM (DARK / LIGHT)
 % ==================================================
-
 \ifthenelse{\equal{\impa@mode}{dark}}{
-
-    % --------------------------------
-    % Global dark mode
-    % --------------------------------
-
     \colorlet{MainColor}{black}
     \colorlet{MainTitle}{white}
     \colorlet{BackgroundColor}{black}
 
-    % --------------------------------
-    % NONE PALETTE
-    % Minimal dark mode
-    % --------------------------------
-
     \ifthenelse{\equal{\impa@palette}{none}}{
-
         \colorlet{TitleBackgroundColor}{black}
         \colorlet{TextBackgroundColor}{black}
         \colorlet{TextColor}{white}
-
     }{
-
-        % --------------------------------
-        % BASIC PALETTE
-        % Old standard darkmode
-        % --------------------------------
-
         \ifthenelse{\equal{\impa@palette}{basic}}{
-
             \colorlet{TitleBackgroundColor}{gray}
             \colorlet{TextBackgroundColor}{black!80}
             \colorlet{TextColor}{white}
-
         }{
-
-            % --------------------------------
-            % Colored palettes
-            % Keep colored backgrounds
-            % --------------------------------
-
             \colorlet{TextColor}{black}
-
         }
-
     }
-
 }{
-    % =================================
-    % LIGHT MODE
-    % =================================
-    
-    % Do nothing:
-    % palettes already define everything
+    % Light mode inherits palette configurations
 }
 
-\ProcessOptions\relax % Processa as options
+\ProcessOptions\relax
 
 
-% SEÇÃO 2 - CRIAR SEÇÕES E A ESTRUTURA BASE DAS SEÇÕES
-% ----------IGOR ----------- faça as seguinte modificações
+\makeatletter
+\newcommand{\institute}[1]{\gdef\@institute{#1}} % Define o comando \institute
+\newcommand{\@institute}{} % Inicializa vazio caso o usuário não use
+
+\renewcommand{\maketitle}{
+    \begin{center}
+        {\Huge\bfseries \color{MainTitle} \@title \par}
+        \vspace{0.8em}
+        {\Large \color{MainTitle} \@author \par}
+        \vspace{0.4em}
+        {\large \itshape \color{MainTitle} \@institute \par} % Exibe o instituto em itálico
+        \vspace{0.4em}
+        {\large \color{MainTitle} \@date \par}
+    \end{center}
+    \vspace{2em}
+}
+\makeatother
 
 
+% ==================================================
+% STRUCTURE & CARDS (IGOR'S IMPLEMENTATION)
+% ==================================================
 
-% Definição do ambiente para o time implementar
-% Argumentos:
-% #1 = Cor do Título (Pílula) 
-% #2 = Cor do Fundo da Caixa 
-% #3 = Cor do Texto e Borda   
-% #4 = Título (Obrigatório)
-
-
-% Estrutura de box pronto, IGOR fica a vontade para modificar
-\NewDocumentEnvironment{postercard}{O{TitleBackgroundColor} O{TextBackgroundColor} O{TextColor} m}{%
+% Modificado para aceitar até 4 argumentos opcionais de forma segura:
+% #1 = Cor de Fundo do Título (Pílula)
+% #2 = Cor de Fundo da Caixa
+% #3 = Cor do Texto do Título/Conteúdo Geral
+% #4 = Cor do Texto específico de dentro do card (caso queira sobrescrever o #3)
+% #5 = Título do card (Obrigatório)
+\NewDocumentEnvironment{postercard}{
+    O{TitleBackgroundColor} 
+    O{TextBackgroundColor} 
+    O{TextColor} 
+    O{#3} 
+    m
+}{%
     \begin{tcolorbox}[
         enhanced,
-        colback=#2,           % Fundo da caixa (suave)
-        colframe=#1,          % Borda da caixa (geralmente combina com a pílula)
-        coltitle=#3,          % Cor do texto do título (geralmente preto ou branco)
+        colback=#2,                           % Fundo da caixa
+        colframe=#1,                          % Borda da caixa
+        coltitle=#3,                          % Cor do texto do título
         fonttitle=\bfseries\large,
-        coltext=#3,
-        title={#4},           % Texto do título
+        coltext=#4,                           % Cor do texto do conteúdo
+        title={#5},                           % Texto do título
         attach boxed title to top center={yshift=-3mm,yshifttext=-1mm},
         boxed title style={
-            colback=#1,       % Fundo da pílula
+            colback=#1,                       % Fundo da pílula
             arc=2mm,
             outer arc=1mm,
         },
         arc=0mm,
-        boxrule=1.5pt,        % Borda um pouco mais grossa fica melhor em posters
+        boxrule=1.5pt,                        % Espessura da borda adaptada para posters
         top=4mm,
     ]%
 }{%
     \end{tcolorbox}
 }
 
+% ==================================================
+% DOCUMENT OVERRIDES & LAYOUT
+% ==================================================
 \AtBeginDocument{
-    \pagecolor{BackgroundColor} % Aplica a cor da página para o darkmode funcionar
+    \pagecolor{BackgroundColor} 
     \color{TextColor}
-    \renewcommand{\refname}{Referências} % Mantém em português
+    \renewcommand{\refname}{Referências}
 }
 
-% Personaliza o título
+% Personalização do Bloco do Título Principal
 \makeatletter
 \renewcommand{\maketitle}{
     \begin{center}
@@ -306,11 +221,9 @@
 }
 \makeatother
 
-% Remove a numeração de página
 \pagenumbering{gobble}
 
-%FORMATAÇÃO MEXER DEPOIS
-
+% Configuração das Dimensões do Poster
 \setlength{\paperwidth}{210mm}
 \setlength{\paperheight}{297mm}
 \setlength{\textwidth}{160mm}
