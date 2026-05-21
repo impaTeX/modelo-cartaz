@@ -1,50 +1,50 @@
-\documentclass[darkmode]{impaTeXPoster}
+\documentclass{impaTeXPoster}
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{lipsum} % só pra texto de exemplo
+\usepackage{lipsum}
 
 \title{Poster Teste}
 \author{Bruno Pereira}
+\institute{IMPA Tech}
 \date{2026}
 
 \begin{document}
 
-\begin{samepage} % Força página única
-
 \maketitle
 
-\begin{multicols}{2} % Define quantidade de colunas
+\begin{columns}
 
-\begin{postercard}{Introdução}
+% ================= LEFT COLUMN =================
+
+\column{0.48}
+
+\begin{postercard}[green][green!20]{Introdução}
 Este é um exemplo de seção usando a classe ImpaTeXPoster.
 
 \lipsum[1]
 \end{postercard}
 
-\vspace{1em}
-
-\begin{postercard}[orange][yellow][black]{Objetivo}
+\begin{postercard}[green][green!20][yellow]{Objetivo}
 Mostrar como usar diferentes cores no ambiente.
-\lipsum[2]
 
+\lipsum[2]
 \end{postercard}
 
-\vspace{1em}
+% ================= RIGHT COLUMN =================
 
-\begin{postercard}[green][beige][black]{Resultados}
+\column{0.48}
 
+\begin{postercard}{Resultados}
 \lipsum[3]
 \end{postercard}
 
-\vspace{1em}
-
-\begin{postercard}{Conclusão}
+\begin{postercard}[black][black!85][white][pink]{Resultados}
 \lipsum[4]
-
 \end{postercard}
 
-% Referências
+\begin{postercard}{Referências}
+
 \begin{thebibliography}{99}
 
 \bibitem{popper}
@@ -59,8 +59,8 @@ São Paulo: Brasiliense, 1999.
 
 \end{thebibliography}
 
-\end{multicols}
+\end{postercard}
 
-\end{samepage}
+\end{columns}
 
 \end{document}

@@ -1,11 +1,38 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{impaTeXPoster}[2026/04/20 My Custom LaTeX Class]
-\LoadClass{article}
+
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{tikzposter}}
+
+% Cores para o simplemode
+\DeclareOption{simplemode}{
+    \colorlet{MainColor}{white}
+    \colorlet{TextColor}{black}
+    \colorlet{BackgroundColor}{white}
+    % TITLE
+    \colorlet{titlefgcolor}{white}
+    \colorlet{titlebgcolor}{pink}
+    \colorlet{titlebordercolor}{orange}
+}
+
+% Cores para o darkmode 
+\DeclareOption{darkmode}{
+    \colorlet{MainColor}{black}
+    \colorlet{TextColor}{white}
+    \colorlet{BackgroundColor}{black}
+    \colorlet{TitleBackgroundColor}{black!70}
+    \colorlet{TextBackgroundColor}{black!85}
+    \colorlet{titlefgcolor}{white}
+    \colorlet{titlebgcolor}{black!90}
+    \colorlet{titlebordercolor}{pink}
+}
+
+\ProcessOptions\relax
+
+\LoadClass[a0paper,portrait]{tikzposter}
+\usetheme{Basic}
+
 \RequirePackage{xcolor} %Pacote para cores
 \RequirePackage{xparse} %Pacote para argumentos opcionais
-\RequirePackage[most]{tcolorbox} %cria as seções
-\RequirePackage{multicol} % Pacote para várias colunas
-\RequirePackage{geometry} % Modifica dimensões da página
 
 % IMPORTANTE: SE TIVER COM DÚVIDA NO CÓDIGO, FALAR COMIGO (BRUNO).
 % CRIEM BRANCHS SEPARADAS 
@@ -32,19 +59,12 @@
 % Continue
 
 % Cores Funcionais Padrão
-\colorlet{MainColor}{beige}
-\colorlet{TextColor}{black}
-\colorlet{BackgroundColor}{white}
+\providecolor{MainColor}{named}{beige}
+\providecolor{TextColor}{named}{black}
+\providecolor{BackgroundColor}{named}{white}
 
-% Cores para o simplemode
-\DeclareOption{simplemode}{
-    \colorlet{MainColor}{white}
-    \colorlet{TextColor}{black}
-    \colorlet{BackgroundColor}{white}
-}
-
-\colorlet{TitleBackgroundColor}{pink} % Cor de fundo do título nas seções
-\colorlet{TextBackgroundColor}{pinkEx1} % Cor de fundo do texto nas seções
+\providecolor{TitleBackgroundColor}{named}{pink}
+\providecolor{TextBackgroundColor}{named}{pinkEx1}
 
 % Criação de options
 % -------------- Maria criar mais options ----------
@@ -54,14 +74,7 @@
 %   \colorlet{TextBackgroundColor}{greenEx1}
 %}
 
-% Cores para o darkmode 
-\DeclareOption{darkmode}{
-    \colorlet{MainColor}{black}
-    \colorlet{TextColor}{white}
-    \colorlet{BackgroundColor}{black}
-    \colorlet{TitleBackgroundColor}{gray}
-    \colorlet{TextBackgroundColor}{black!80}
-}
+
 
 \ProcessOptions\relax % Processa as options
 
@@ -77,64 +90,51 @@
 % #3 = Cor do Texto e Borda   
 % #4 = Título (Obrigatório)
 
+% BACKGROUND
+\colorlet{backgroundcolor}{BackgroundColor}
+
+% TITLE
+\colorlet{titlefgcolor}{TextColor}
+\colorlet{titlebgcolor}{MainColor}
+\colorlet{titlebordercolor}{MainColor}
+\colorlet{blocklinecolor}{TextColor}
+
+% BLOCKS
+\colorlet{blocktitlebgcolor}{TitleBackgroundColor}
+\colorlet{blocktitlefgcolor}{TextColor}
+
+\colorlet{blockbodybgcolor}{TextBackgroundColor}
+\colorlet{blockbodyfgcolor}{TextColor}
+
 
 % Estrutura de box pronto, IGOR fica a vontade para modificar
-\NewDocumentEnvironment{postercard}{O{TitleBackgroundColor} O{TextBackgroundColor} O{TextColor} m}{%
-    \begin{tcolorbox}[
-        enhanced,
-        colback=#2,           % Fundo da caixa (suave)
-        colframe=#1,          % Borda da caixa (geralmente combina com a pílula)
-        coltitle=#3,          % Cor do texto do título (geralmente preto ou branco)
-        fonttitle=\bfseries\large,
-        coltext=#3,
-        title={#4},           % Texto do título
-        attach boxed title to top center={yshift=-3mm,yshifttext=-1mm},
-        boxed title style={
-            colback=#1,       % Fundo da pílula
-            arc=2mm,
-            outer arc=1mm,
-        },
-        arc=0mm,
-        boxrule=1.5pt,        % Borda um pouco mais grossa fica melhor em posters
-        top=4mm,
-    ]%
-}{%
-    \end{tcolorbox}
+\NewDocumentEnvironment{postercard}
+{O{TitleBackgroundColor} O{TextBackgroundColor} O{TextColor} O{TextColor} m +b}
+{
+    \begingroup
+
+    % título
+    \colorlet{blocktitlebgcolor}{#1}
+    \colorlet{blocktitlefgcolor}{#3}
+
+    % corpo
+    \colorlet{blockbodybgcolor}{#2}
+    \colorlet{blockbodyfgcolor}{#3}
+
+    % borda
+    \colorlet{blocklinecolor}{#4}
+
+    \block{#5}{
+        #6
+    }
+
+    \endgroup
 }
+{}
 
 \AtBeginDocument{
-    \pagecolor{BackgroundColor} % Aplica a cor da página para o darkmode funcionar
     \color{TextColor}
-    \renewcommand{\refname}{Referências} % Mantém em português
+    \renewcommand{\refname}{\vspace{-3cm}}
 }
-
-% Personaliza o título
-\makeatletter
-\renewcommand{\maketitle}{
-    \begin{center}
-        {\Huge\bfseries \color{TextColor} \@title \par}
-        \vspace{1em}
-        {\Large \color{TextColor} \@author \par}
-        \vspace{0.5em}
-        {\large \color{TextColor} \@date \par}
-    \end{center}
-    \vspace{2em}
-}
-\makeatother
-
-% Remove a numeração de página
-\pagenumbering{gobble}
-
-%FORMATAÇÃO MEXER DEPOIS
-
-\setlength{\paperwidth}{210mm}
-\setlength{\paperheight}{297mm}
-\setlength{\textwidth}{160mm}
-\setlength{\textheight}{240mm}
-\setlength{\topmargin}{0pt}
-\setlength{\oddsidemargin}{0pt}
-\setlength{\evensidemargin}{0pt}
-\setlength{\headheight}{30pt}
-\setlength{\headsep}{30pt}
 
 \endinput
