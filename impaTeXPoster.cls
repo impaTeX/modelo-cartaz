@@ -26,15 +26,57 @@
 
 % Definição de cores extendidas
 % ------------------- MARIA extende o espectro de cores de acordo com as  diretrizes -----------
-% deixa algo do tipo \definecolor{pinkEx1}{HTML}{...}, \definecolor{pinkEx2}{HTML}{...}, etc... 
-%EXEMPLO
-\definecolor{pinkEx1}{HTML}{F7BEF4}
-% Continue
+
+% Definindo paleta de cores do impatech estendida
+
+% =========================
+% PINK
+% =========================
+\definecolor{pink50}{HTML}{F7BEF4}
+\definecolor{pink75}{HTML}{F59FED}
+\definecolor{pink100}{HTML}{FF8AEF} % já definida, mas se alguém tentar usar assim vai funcionar!
+\definecolor{pink200}{HTML}{F073E0}
+\definecolor{pink300}{HTML}{E35DD4}
+\definecolor{pink400}{HTML}{D646C7}
+
+
+% =========================
+% YELLOW
+% =========================
+\definecolor{yellow50}{HTML}{F7F7B2}
+\definecolor{yellow75}{HTML}{F5F79B}
+\definecolor{yellow100}{HTML}{ECF47A}
+\definecolor{yellow200}{HTML}{EDF15D}
+\definecolor{yellow300}{HTML}{EDEE40}
+\definecolor{yellow400}{HTML}{EEEA24}
+
+% =========================
+% ORANGE
+% =========================
+\definecolor{orange50}{HTML}{F7D296}
+\definecolor{orange75}{HTML}{F7CB80}
+\definecolor{orange100}{HTML}{FFC555}
+\definecolor{orange200}{HTML}{F9B74B}
+\definecolor{orange300}{HTML}{F9AA41}
+\definecolor{orange400}{HTML}{FCA72B}
+
+% =========================
+% GREEN
+% =========================
+\definecolor{green50}{HTML}{DEF7C5}
+\definecolor{green75}{HTML}{D1FAAF}
+\definecolor{green100}{HTML}{BDF58B}
+\definecolor{green200}{HTML}{A6F865}
+\definecolor{green300}{HTML}{91F340}
+\definecolor{green400}{HTML}{7BEE1B}
+
+
 
 % Cores Funcionais Padrão
 \colorlet{MainColor}{beige}
 \colorlet{TextColor}{black}
 \colorlet{BackgroundColor}{white}
+\colorlet{MainTitle}{black}
 
 % Cores para o simplemode
 \DeclareOption{simplemode}{
@@ -43,27 +85,63 @@
     \colorlet{BackgroundColor}{white}
 }
 
-\colorlet{TitleBackgroundColor}{pink} % Cor de fundo do título nas seções
-\colorlet{TextBackgroundColor}{pinkEx1} % Cor de fundo do texto nas seções
 
-% Criação de options
-% -------------- Maria criar mais options ----------
-% dica: siga o exemplo abaixo e faça para as outras cores (rosa, amarelo e laranja)
-%\DeclareOption{allgreen}{
-%   \colorlet{TitleBackgroundColor}{green}
-%   \colorlet{TextBackgroundColor}{greenEx1}
-%}
+\colorlet{TitleBackgroundColor}{beige} % Cor de fundo do título nas seções
+\colorlet{TextBackgroundColor}{beige} % Cor de fundo do texto nas seções
+
+\DeclareOption{minimalmode}{
+    \def\minimalmodeactive{1}
+    \colorlet{MainColor}{white}
+    \colorlet{TextColor}{black}
+    \colorlet{BackgroundColor}{white}
+    \colorlet{MainColor}{white}
+    \colorlet{TitleBackgroundColor}{white}
+    \colorlet{TextBackgroundColor}{white} 
+}
 
 % Cores para o darkmode 
 \DeclareOption{darkmode}{
     \colorlet{MainColor}{black}
     \colorlet{TextColor}{white}
+    \colorlet{MainTitle}{white}
     \colorlet{BackgroundColor}{black}
-    \colorlet{TitleBackgroundColor}{gray}
-    \colorlet{TextBackgroundColor}{black!80}
+
+    \ifnum\minimalmodeactive=1
+        \colorlet{TitleBackgroundColor}{black}
+        \colorlet{TextBackgroundColor}{black}
+    \else
+        \colorlet{TitleBackgroundColor}{gray}
+        \colorlet{TextBackgroundColor}{black!80}
+    \fi
+}
+
+
+\DeclareOption{greenmode}{
+       \colorlet{TitleBackgroundColor}{green}
+        \colorlet{TextBackgroundColor}{green50}
+        \colorlet{TextColor}{black}
+}
+
+\DeclareOption{pinkmode}{
+       \colorlet{TitleBackgroundColor}{pink}
+        \colorlet{TextBackgroundColor}{pink50}
+        \colorlet{TextColor}{black}
+}
+
+\DeclareOption{orangemode}{
+       \colorlet{TitleBackgroundColor}{orange}
+        \colorlet{TextBackgroundColor}{orange50}
+        \colorlet{TextColor}{black}
+}
+
+\DeclareOption{yellowmode}{
+        \colorlet{TitleBackgroundColor}{yellow}
+        \colorlet{TextBackgroundColor}{yellow50}
+        \colorlet{TextColor}{black}
 }
 
 \ProcessOptions\relax % Processa as options
+
 
 % SEÇÃO 2 - CRIAR SEÇÕES E A ESTRUTURA BASE DAS SEÇÕES
 % ----------IGOR ----------- faça as seguinte modificações
@@ -112,11 +190,11 @@
 \makeatletter
 \renewcommand{\maketitle}{
     \begin{center}
-        {\Huge\bfseries \color{TextColor} \@title \par}
+        {\Huge\bfseries \color{MainTitle} \@title \par}
         \vspace{1em}
-        {\Large \color{TextColor} \@author \par}
+        {\Large \color{MainTitle} \@author \par}
         \vspace{0.5em}
-        {\large \color{TextColor} \@date \par}
+        {\large \color{MainTitle} \@date \par}
     \end{center}
     \vspace{2em}
 }
