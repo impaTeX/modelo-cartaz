@@ -1,26 +1,33 @@
-\documentclass[orangemode]{impaTeXPoster} 
+\documentclass[palette=basic, mode=dark]{impaTeXPoster}
 
 
 % ==================================================
-% Opções de modo da classe
+% Opções da classe
 % ==================================================
-% A classe permite combinar múltiplos modos de estilo.
 %
-% Modos disponíveis:
-% - simplemode : bege como cor principal
-% - minimalmode: apenas branco e preto
-% - darkmode   : ativa o tema escuro (pode ser combinado como outros modos)
-% - pinkmode   : usa a paleta rosa
-% - yellowmode : usa a paleta amarela
-% - orangemode : usa a paleta laranja
-% - greenmode  : usa a paleta verde
+% A classe suporta dois sistemas principais de customização:
+%    palette = define a identidade visual dos cards gerados por padrão
+%              (independentemente da pallete escolhida é possivel forçar outras cores de cards
+%               ao usar o poster card com cores pré-definidas, ver exmplos no documento)
+%    mode    = controla o estilo global da interface (claro/escuro)
 %
-% Uso:
-% \documentclass[pinkmode,darkmode]{impaTeXPoster}
+% --------------------------------------------------
+% PALETTES DISPONÍVEIS
+% --------------------------------------------------
 %
-% Funcionamento:
-% - Modos de cor (pink, green, etc.) definem a paleta principal.
-% - O darkmode ajusta o fundo e o contraste do texto.
+% palette = none,
+%           green,
+%           pink,
+%           orange,
+%           yellow,
+%           basic
+%
+% --------------------------------------------------
+% MODOS DISPONÍVEIS
+% --------------------------------------------------
+%   mode = light, dark
+%
+% SINTA-SE LIVRE PARA TESTAR AS COMBINAÇÕES!
 % ==================================================
 
 
@@ -41,20 +48,38 @@
 \maketitle
 
 \begin{multicols}{2} % Define quantidade de colunas
+% ==================================================
+% EXEMPLO 1 — CARD PADRÃO
+% Usa automaticamente a palette escolhida
+% ==================================================
 
 \begin{postercard}{Introdução}
-Este é um exemplo de seção usando a classe ImpaTeXPoster.
+
+Este card utiliza automaticamente as cores definidas pela combinação de
+\texttt{palette} e \texttt{mode} da classe.
 
 \lipsum[1]
+
 \end{postercard}
 
 \vspace{1em}
 
-\begin{postercard}[orange][yellow][black]{Objetivo}
-Mostrar como usar diferentes cores no ambiente.
+% ==================================================
+% EXEMPLO 2 — CARD CUSTOMIZADO
+% Ignora a palette da classe
+% ==================================================
+
+\begin{postercard}[orange][yellow50][black]{Objetivo}
+
+Este card utiliza cores definidas manualmente pelo usuário, independentemente
+da palette global da classe.
 
 \lipsum[2]
+
 \end{postercard}
+
+\vspace{1em}
+
 
 \vspace{1em}
 
@@ -66,6 +91,9 @@ Mostrar como usar diferentes cores no ambiente.
 \vspace{1em}
 
 \begin{postercard}{Conclusão}
+
+O comportamento visual deste card muda automaticamente quando
+\texttt{mode=dark} é ativado.
 
 \lipsum[4]
 \end{postercard}

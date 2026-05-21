@@ -1,11 +1,46 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{impaTeXPoster}[2026/04/20 My Custom LaTeX Class]
+
 \LoadClass{article}
-\RequirePackage{xcolor} %Pacote para cores
-\RequirePackage{xparse} %Pacote para argumentos opcionais
-\RequirePackage[most]{tcolorbox} %cria as seções
-\RequirePackage{multicol} % Pacote para várias colunas
-\RequirePackage{geometry} % Modifica dimensões da página
+
+% ==================================================
+% PACKAGES
+% ==================================================
+
+\RequirePackage{xcolor}
+\RequirePackage{xparse}
+\RequirePackage[most]{tcolorbox}
+\RequirePackage{multicol}
+\RequirePackage{geometry}
+\RequirePackage{kvoptions}
+\RequirePackage{ifthen}
+
+% ==================================================
+% OPTIONS SYSTEM
+% ==================================================
+
+\SetupKeyvalOptions{
+    family=impa,
+    prefix=impa@
+}
+
+\DeclareStringOption[basic]{palette}
+\DeclareStringOption[light]{mode}
+
+\ProcessKeyvalOptions*
+
+% ==================================================
+% BASE COLORS
+% ==================================================
+
+\definecolor{white}{HTML}{F3F3F3}
+\definecolor{black}{HTML}{000000}
+
+\definecolor{beige}{HTML}{CCC4AF}
+\definecolor{pink}{HTML}{FF8AEF}
+\definecolor{orange}{HTML}{FFC555}
+\definecolor{yellow}{HTML}{ECF47A}
+\definecolor{green}{HTML}{BEFF88}
 
 % IMPORTANTE: SE TIVER COM DÚVIDA NO CÓDIGO, FALAR COMIGO (BRUNO).
 % CRIEM BRANCHS SEPARADAS 
@@ -78,66 +113,137 @@
 \colorlet{BackgroundColor}{white}
 \colorlet{MainTitle}{black}
 
-% Cores para o simplemode
-\DeclareOption{simplemode}{
-    \colorlet{MainColor}{white}
-    \colorlet{TextColor}{black}
-    \colorlet{BackgroundColor}{white}
-}
+
+% ==================================================
+% DEFAULT FUNCTIONAL COLORS
+% ==================================================
+
+\colorlet{MainColor}{beige}
+\colorlet{TextColor}{black}
+\colorlet{BackgroundColor}{white}
+\colorlet{MainTitle}{black}
+
+\colorlet{TitleBackgroundColor}{beige}
+\colorlet{TextBackgroundColor}{beige}
 
 
-\colorlet{TitleBackgroundColor}{beige} % Cor de fundo do título nas seções
-\colorlet{TextBackgroundColor}{beige} % Cor de fundo do texto nas seções
+% ==================================================
+% PALETTES
+% ==================================================
 
-\DeclareOption{minimalmode}{
-    \def\minimalmodeactive{1}
-    \colorlet{MainColor}{white}
-    \colorlet{TextColor}{black}
-    \colorlet{BackgroundColor}{white}
-    \colorlet{MainColor}{white}
+% -------------------------
+% BASIC
+% -------------------------
+
+\ifthenelse{\equal{\impa@palette}{basic}}{
+    \colorlet{TitleBackgroundColor}{beige}
+    \colorlet{TextBackgroundColor}{beige}
+}{}
+
+% -------------------------
+% GREEN
+% -------------------------
+
+\ifthenelse{\equal{\impa@palette}{green}}{
+    \colorlet{TitleBackgroundColor}{green}
+    \colorlet{TextBackgroundColor}{green50}
+}{}
+
+% -------------------------
+% PINK
+% -------------------------
+
+\ifthenelse{\equal{\impa@palette}{pink}}{
+    \colorlet{TitleBackgroundColor}{pink}
+    \colorlet{TextBackgroundColor}{pink50}
+}{}
+
+% -------------------------
+% ORANGE
+% -------------------------
+
+\ifthenelse{\equal{\impa@palette}{orange}}{
+    \colorlet{TitleBackgroundColor}{orange}
+    \colorlet{TextBackgroundColor}{orange50}
+}{}
+
+% -------------------------
+% YELLOW
+% -------------------------
+
+\ifthenelse{\equal{\impa@palette}{yellow}}{
+    \colorlet{TitleBackgroundColor}{yellow}
+    \colorlet{TextBackgroundColor}{yellow50}
+}{}
+
+% -------------------------
+% NONE
+% -------------------------
+
+\ifthenelse{\equal{\impa@palette}{none}}{
     \colorlet{TitleBackgroundColor}{white}
-    \colorlet{TextBackgroundColor}{white} 
-}
+    \colorlet{TextBackgroundColor}{white}
+    \colorlet{MainColor}{white} 
+}{}
 
-% Cores para o darkmode 
-\DeclareOption{darkmode}{
+% ==================================================
+% MODE SYSTEM
+% ==================================================
+
+\ifthenelse{\equal{\impa@mode}{dark}}{
+
+    % --------------------------------
+    % Global dark mode
+    % --------------------------------
+
     \colorlet{MainColor}{black}
-    \colorlet{TextColor}{white}
     \colorlet{MainTitle}{white}
     \colorlet{BackgroundColor}{black}
 
-    \ifnum\minimalmodeactive=1
+    % --------------------------------
+    % NONE PALETTE
+    % Minimal dark mode
+    % --------------------------------
+
+    \ifthenelse{\equal{\impa@palette}{none}}{
+
         \colorlet{TitleBackgroundColor}{black}
         \colorlet{TextBackgroundColor}{black}
-    \else
-        \colorlet{TitleBackgroundColor}{gray}
-        \colorlet{TextBackgroundColor}{black!80}
-    \fi
-}
+        \colorlet{TextColor}{white}
 
+    }{
 
-\DeclareOption{greenmode}{
-       \colorlet{TitleBackgroundColor}{green}
-        \colorlet{TextBackgroundColor}{green50}
-        \colorlet{TextColor}{black}
-}
+        % --------------------------------
+        % BASIC PALETTE
+        % Old standard darkmode
+        % --------------------------------
 
-\DeclareOption{pinkmode}{
-       \colorlet{TitleBackgroundColor}{pink}
-        \colorlet{TextBackgroundColor}{pink50}
-        \colorlet{TextColor}{black}
-}
+        \ifthenelse{\equal{\impa@palette}{basic}}{
 
-\DeclareOption{orangemode}{
-       \colorlet{TitleBackgroundColor}{orange}
-        \colorlet{TextBackgroundColor}{orange50}
-        \colorlet{TextColor}{black}
-}
+            \colorlet{TitleBackgroundColor}{gray}
+            \colorlet{TextBackgroundColor}{black!80}
+            \colorlet{TextColor}{white}
 
-\DeclareOption{yellowmode}{
-        \colorlet{TitleBackgroundColor}{yellow}
-        \colorlet{TextBackgroundColor}{yellow50}
-        \colorlet{TextColor}{black}
+        }{
+
+            % --------------------------------
+            % Colored palettes
+            % Keep colored backgrounds
+            % --------------------------------
+
+            \colorlet{TextColor}{black}
+
+        }
+
+    }
+
+}{
+    % =================================
+    % LIGHT MODE
+    % =================================
+    
+    % Do nothing:
+    % palettes already define everything
 }
 
 \ProcessOptions\relax % Processa as options
