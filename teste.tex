@@ -1,9 +1,8 @@
-\documentclass[palette=green, mode=dark]{impaTeXPoster}
+\documentclass[palette=green,mode=dark]{impaTeXPoster}
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{lipsum}
-
 
 \title{Poster Teste}
 \author{Bruno Pereira}
@@ -14,36 +13,35 @@
 
 \maketitle
 
-% Usando o multicols (carregado pela classe) para dividir o poster em 2 colunas
-\begin{multicols}{2}
+\begin{columns}
 
-% ================= LEFT COLUMN =================
+% ==========================================
+% LEFT COLUMN
+% ==========================================
+\column{0.5}
 
-\begin{postercard}[green][green!20]{Introdução}
+\begin{postercard}[green,green!20]{Introdução}
 Este é um exemplo de seção usando a classe ImpaTeXPoster.
 
 \lipsum[1]
 \end{postercard}
 
-\begin{postercard}[green][green!20][yellow]{Objetivo}
+\begin{postercard}[green,green!20,yellow]{Objetivo}
 Mostrar como usar diferentes cores no ambiente.
 
 \lipsum[2]
 \end{postercard}
 
-
-% ================= RIGHT COLUMN =================
-% O multicol gerencia a quebra de coluna automaticamente, 
-% mas você pode forçar a quebra com \columnbreak se achar necessário.
-\columnbreak 
+% ==========================================
+% RIGHT COLUMN
+% ==========================================
+\column{0.5}
 
 \begin{postercard}{Resultados}
 \lipsum[3]
 \end{postercard}
 
-% Este card usará: 
-% Fundo do título=black, Fundo do card=black!85, Texto do título=white, Texto do conteúdo=pink
-\begin{postercard}[black][black!85][white][pink]{Resultados}
+\begin{postercard}[black,black!85,white]{Resultados}
 \lipsum[4]
 \end{postercard}
 
@@ -65,6 +63,6 @@ São Paulo: Brasiliense, 1999.
 
 \end{postercard}
 
-\end{multicols}
+\end{columns}
 
 \end{document}
