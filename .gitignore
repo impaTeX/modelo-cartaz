@@ -5,7 +5,7 @@
 *.synctex.gz
 *.toc
 *.out
-!*.pdf
+*.pdf
 
 node_modules/
 vendor/
