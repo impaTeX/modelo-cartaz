@@ -80,39 +80,58 @@
 \definecolor{green400}{HTML}{7BEE1B}
 
 % ==================================================
-% 6. DYNAMIC PALETTE ALLOCATION
+% 6. DYNAMIC PALETTE ALLOCATION (ESTRUTURA NOVA)
 % ==================================================
-% Criando variáveis internas para não dar conflito com o tikzposter
-\newcommand{\dynTitleBG}{beige}
-\newcommand{\dynTextBG}{beige}
-\newcommand{\dynTextFG}{black}
-\newcommand{\dynCanvasBG}{white}
+% 1. Inicializa os nomes das cores com valores padrão (Fallback)
+\colorlet{impaCanvas}{white}
+\colorlet{impaTitleBG}{beige}
+\colorlet{impaTextFG}{black}
+\colorlet{impaBlockBG}{beige}
+\colorlet{impaTextTitle}{black}
 
-% Lógica das paletas
-\ifthenelse{\equal{\impa@palette}{basic}}{
-    \renewcommand{\dynTitleBG}{beige}\renewcommand{\dynTextBG}{beige}}{}
+% 2. Aplica a paleta escolhida pelo usuário via if/else
 \ifthenelse{\equal{\impa@palette}{green}}{
-    \renewcommand{\dynTitleBG}{green}\renewcommand{\dynTextBG}{green50}}{}
+    \colorlet{impaTitleBG}{green}
+    \colorlet{impaBlockBG}{green50}
+}{
 \ifthenelse{\equal{\impa@palette}{pink}}{
-    \renewcommand{\dynTitleBG}{pink}\renewcommand{\dynTextBG}{pink50}}{}
+    \colorlet{impaTitleBG}{pink}
+    \colorlet{impaBlockBG}{pink50}
+}{
 \ifthenelse{\equal{\impa@palette}{orange}}{
-    \renewcommand{\dynTitleBG}{orange}\renewcommand{\dynTextBG}{orange50}}{}
+    \colorlet{impaTitleBG}{orange}
+    \colorlet{impaBlockBG}{orange50}
+}{
 \ifthenelse{\equal{\impa@palette}{yellow}}{
-    \renewcommand{\dynTitleBG}{yellow}\renewcommand{\dynTextBG}{yellow50}}{}
+    \colorlet{impaTitleBG}{yellow}
+    \colorlet{impaBlockBG}{yellow50}
+}{
 \ifthenelse{\equal{\impa@palette}{none}}{
-    \renewcommand{\dynTitleBG}{white}\renewcommand{\dynTextBG}{white}\renewcommand{\dynCanvasBG}{white}}{}
+    \colorlet{impaCanvas}{white}
+    \colorlet{impaTitleBG}{white}
+    \colorlet{impaBlockBG}{white}
+}{
+    % Caso seja 'basic' ou qualquer outra coisa
+    \colorlet{impaTitleBG}{beige}
+    \colorlet{impaBlockBG}{beige}
+}}}}}
 
-% Lógica do Modo Escuro (Dark Mode)
+% 3. Aplica a modificação do Modo Escuro (Dark Mode Override)
 \ifthenelse{\equal{\impa@mode}{dark}}{
-    \renewcommand{\dynCanvasBG}{black}
-    \renewcommand{\dynTextFG}{white}
+    \colorlet{impaCanvas}{black}
+    \colorlet{impaTextFG}{white}
+    \colorlet{impaTextTitle}{white}
+    
     \ifthenelse{\equal{\impa@palette}{none}}{
-        \renewcommand{\dynTitleBG}{black}\renewcommand{\dynTextBG}{black}
+        \colorlet{impaTitleBG}{black}
+        \colorlet{impaBlockBG}{black}
     }{
         \ifthenelse{\equal{\impa@palette}{basic}}{
-            \renewcommand{\dynTitleBG}{gray}\renewcommand{\dynTextBG}{black!80}
+            \colorlet{impaTitleBG}{gray}
+            \colorlet{impaBlockBG}{black!80}
         }{
-            \renewcommand{\dynTextFG}{black} % Mantém texto escuro sobre fundo colorido
+            % Para paletas coloridas (green, pink, etc.) no modo dark:
+            \colorlet{impaTextFG}{black} 
         }
     }
 }{}
@@ -120,19 +139,22 @@
 % ==================================================
 % 7. TIKZPOSTER COMPATIBILITY LAYER
 % ==================================================
-% Força o tikzposter a registrar e aceitar o nosso mapa de cores dinâmicas
+% Agora sim o Tikzposter lê as cores reais mapeadas diretamente!
 \definecolorstyle{impaThemeColors}{}{
-    \colorlet{backgroundcolor}{\dynCanvasBG}
-    \colorlet{framecolor}{\dynTitleBG}
-    \colorlet{titlebgcolor}{\dynTitleBG}
-    \colorlet{titlefgcolor}{\dynTextFG}
-    \colorlet{blocktitlebgcolor}{\dynTitleBG}
-    \colorlet{blocktitlefgcolor}{\dynTextFG}
-    \colorlet{blockbodybgcolor}{\dynTextBG}
-    \colorlet{blockbodyfgcolor}{\dynTextFG}
+    \colorlet{backgroundcolor}{impaCanvas}
+    \colorlet{framecolor}{impaTitleBG}
+    \colorlet{titlebgcolor}{impaTitleBG}
+    \colorlet{titlefgcolor}{impaTextTitle}        
+    \colorlet{blocktitlebgcolor}{impaTitleBG}
+    \colorlet{blocktitlefgcolor}{impaTextFG}
+    \colorlet{blockbodybgcolor}{impaBlockBG}
+    \colorlet{blockbodyfgcolor}{impaTextFG}
 }
+
 \usetheme{Basic}
 \usecolorstyle{impaThemeColors}
+\colorlet{titlebgcolor}{impaTitleBG}
+\colorlet{titlefgcolor}{impaTextTitle}
 
 % ==================================================
 % 8. CUSTOM ENVIRONMENTS
@@ -155,16 +177,16 @@
 {
     \begingroup
     \ifthenelse{\equal{#1}{}}{
-        % Padrão: Usa a cor da paleta alocada
-        \colorlet{blocktitlebgcolor}{\dynTitleBG}
-        \colorlet{blockbodybgcolor}{\dynTextBG}
-        \colorlet{blocktitlefgcolor}{\dynTextFG}
-        \colorlet{blockbodyfgcolor}{\dynTextFG}
+        % Padrão: Usa a cor da paleta alocada dinamicamente
+        \colorlet{blocktitlebgcolor}{impaTitleBG}
+        \colorlet{blockbodybgcolor}{impaBlockBG}
+        \colorlet{blocktitlefgcolor}{impaTextFG}
+        \colorlet{blockbodyfgcolor}{impaTextFG}
     }{
-        % Customizado por vírgula
-        \colorlet{customTitleBG}{\dynTitleBG}
-        \colorlet{customTextBG}{\dynTextBG}
-        \colorlet{customTextFG}{\dynTextFG}
+        % Customizado por vírgula (Mapeia a partir das novas cores base)
+        \colorlet{customTitleBG}{impaTitleBG}
+        \colorlet{customTextBG}{impaBlockBG}
+        \colorlet{customTextFG}{impaTextFG}
         \parsepostercardcolors{#1}
         \colorlet{blocktitlebgcolor}{customTitleBG}
         \colorlet{blockbodybgcolor}{customTextBG}
