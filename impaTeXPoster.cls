@@ -41,9 +41,13 @@
 % ==================================================
 \RequirePackage{graphicx}
 
-% Logo
-\newcommand{\posterlogo}[1]{\def\impa@logo{#1}}
-\def\impa@logo{}
+% Logo direita
+\newcommand{\posterlogo}[1]{\def\impa@rightlogo{#1}}
+\def\impa@rightlogo{}
+
+% Logo esquerda
+\newcommand{\leftposterlogo}[1]{\def\impa@leftlogo{#1}}
+\def\impa@leftlogo{}
 
 % Autores e emails como listas separadas por \\
 \renewcommand{\author}[1]{\def\impa@authors{#1}}
@@ -208,23 +212,71 @@
 \usetitlestyle{ImpaFilled}
 
 \gdef\TP@maketitle{%
-    \begin{minipage}[c]{0.75\linewidth}
-        \raggedright
-        {\bfseries\Huge\color{titlefgcolor}\@title\par}
-        \vspace{0.6em}
-        {\large\color{titlefgcolor}\inlinelist{\impa@authors}\par}
-        \ifx\impa@emails\empty\else
-            \vspace{0.3em}
-            {\small\ttfamily\color{titlefgcolor}\inlinelist{\impa@emails}\par}
-        \fi
-    \end{minipage}%
-    \hfill
-    \begin{minipage}[c]{0.20\linewidth}
-        \raggedleft
-        \ifx\impa@logo\empty\else
-            \includegraphics[width=\linewidth]{\impa@logo}
-        \fi
-    \end{minipage}%
+
+\noindent
+\makebox[\linewidth]{%
+
+% ======================================
+% LOGO ESQUERDA
+% ======================================
+
+\begin{minipage}[c][8cm][c]{0.2\linewidth}
+    \centering
+
+    \ifx\impa@leftlogo\empty\else
+        \includegraphics[
+            height=6cm,
+            width=10cm,
+            keepaspectratio
+        ]{\impa@leftlogo}
+    \fi
+\end{minipage}
+%
+\begin{minipage}[c][8cm][c]{0.6\linewidth}
+    \centering
+    \hspace*{-1cm}
+
+    % TÍTULO
+    {\bfseries
+    \fontsize{82}{48}\selectfont
+    \color{titlefgcolor}
+    \@title\par}
+
+    \vspace{0.6em}
+
+    % AUTORES
+    \begin{center}
+    {\fontsize{30}{60}\selectfont
+    \color{titlefgcolor}
+    \inlinelist{\impa@authors}\par}
+    \end{center}
+
+    \ifx\impa@emails\empty\else
+        \vspace{0.3em}
+
+        % EMAILS
+        \begin{center}
+        {\fontsize{20}{30}\selectfont
+        \ttfamily
+        \color{titlefgcolor}
+        \inlinelist{\impa@emails}\par}
+        \end{center}
+    \fi
+\end{minipage}
+%
+\begin{minipage}[c][8cm][c]{0.2\linewidth}
+    \centering
+
+    \ifx\impa@rightlogo\empty\else
+        \includegraphics[
+            height=5cm,
+            width=15cm,
+            keepaspectratio
+        ]{\impa@rightlogo}
+    \fi
+\end{minipage}
+
+}%
 }
 
 % ==================================================
@@ -281,7 +333,14 @@
 \newlength{\impa@footerheight}
 \newlength{\impa@footerpad}
 \setlength{\impa@footerpad}{1.2cm}
-\setlength{\impa@footerheight}{4.5cm}
+
+\newlength{\impa@qrsize}
+\setlength{\impa@qrsize}{4cm}
+
+\newlength{\impa@footerdivision}
+\setlength{\impa@footerdivision}{0.16\textwidth}
+
+\setlength{\impa@footerheight}{\dimexpr\impa@qrsize + 2.4cm\relax}
 
 \newcommand{\posterfooter}[2]{%
     % Fundo colorido
@@ -297,24 +356,25 @@
 
     % Linha divisória vertical (75% | 25%)
     \draw[line width=1pt, color=black]
-        ({0.5\textwidth - 0.22\textwidth}, {-0.5\textheight + \impa@footerheight - 0.3cm})
-        -- ({0.5\textwidth - 0.22\textwidth}, {-0.5\textheight + 0.3cm});
+        ({0.5\textwidth - \impa@footerdivision}, {-0.5\textheight + \impa@footerheight - 0.3cm})
+        -- ({0.5\textwidth - \impa@footerdivision}, {-0.5\textheight + 0.3cm});
 
     % Conteúdo esquerdo: referências
     \node[
-        anchor=north west,
+        anchor=west,
         inner sep=\impa@footerpad,
         text width={0.78\textwidth - 2\impa@footerpad},
         align=left
-    ] at (-0.5\textwidth, {-0.5\textheight + \impa@footerheight}) {%
+    ] at (-0.5\textwidth, {-0.5\textheight + 0.5\impa@footerheight}) {%
         {\color{impaTextFG}#2}%
     };
 
     % Conteúdo direito: QR code
     \node[anchor=center] 
-        at ({0.5\textwidth - 0.11\textwidth}, {-0.5\textheight + 0.5\impa@footerheight}) {%
-        \qrcode[height=3.5cm]{#1}%
-    };
+        at ({0.5\textwidth - 0.5\impa@footerdivision},
+            {-0.5\textheight + 0.5\impa@footerheight}) {%
+            \qrcode[height=\impa@qrsize]{#1}%
+        };
 }
 
 \endinput
