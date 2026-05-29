@@ -3,13 +3,13 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{lipsum}
+
 \title{Poster Teste}
-\author{Bruno Pereira}
-\institute{IMPA Tech}
-\date{2026}
+\author{Bruno Pereira, Maria Silva, João Souza}
+\authoremail{bruno@impa.br, maria@impa.br, joao@impa.br}
+\posterlogo{logo.png}  % descomente se tiver logo
 
 \begin{document}
-
 \maketitle
 
 \begin{columns}
@@ -63,5 +63,19 @@ São Paulo: Brasiliense, 1999.
 \end{postercard}
 
 \end{columns}
+
+\posterfooter{https://github.com/impaTeX/modelo-cartaz/}{%
+    \begin{thebibliography}{99}
+    \bibitem{popper}
+    POPPER, Karl.
+    \textit{A lógica da pesquisa científica}.
+    São Paulo: Cultrix, 2002.
+
+    \bibitem{chalmers}
+    CHALMERS, A. F.
+    \textit{O que é ciência, afinal?}
+    São Paulo: Brasiliense, 1999.
+    \end{thebibliography}
+}
 
 \end{document}

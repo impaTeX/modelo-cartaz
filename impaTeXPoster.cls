@@ -37,6 +37,21 @@
 \RequirePackage[most]{tcolorbox}
 
 % ==================================================
+% 4b. TITLE METADATA COMMANDS
+% ==================================================
+\RequirePackage{graphicx}
+
+% Logo
+\newcommand{\posterlogo}[1]{\def\impa@logo{#1}}
+\def\impa@logo{}
+
+% Autores e emails como listas separadas por \\
+\renewcommand{\author}[1]{\def\impa@authors{#1}}
+\newcommand{\authoremail}[1]{\def\impa@emails{#1}}
+\def\impa@authors{}
+\def\impa@emails{}
+
+% ==================================================
 % 5. COLOR DEFINITIONS (Maria's Palette)
 % ==================================================
 \definecolor{white}{HTML}{F3F3F3}
@@ -157,6 +172,62 @@
 \colorlet{titlefgcolor}{impaTextTitle}
 
 % ==================================================
+% 7b. CUSTOM TITLE BLOCK
+% ==================================================
+
+\newcommand{\impa@sep}{\quad\textbullet\quad}
+
+\newcommand{\inlinelist}[1]{%
+    \def\impa@first{1}%
+    \@for\impa@item:=#1\do{%
+        \if\impa@first1\def\impa@first{0}\else\impa@sep\fi
+        \impa@item
+    }%
+}
+
+% Novo titlestyle que usa titleposbottom/titlepostop (cobre exatamente o conteúdo)
+\definetitlestyle{ImpaFilled}{
+    width=\paperwidth,
+    roundedcorners=0,
+    linewidth=0pt,
+    innersep=1.5cm,
+    titletotopverticalspace=0mm,
+    titletoblockverticalspace=20mm,
+    titlegraphictotitledistance=10pt
+}{%
+    \draw[draw=none,fill=titlebgcolor]
+    (\titleposleft,\titleposbottom)
+    rectangle
+    (\titleposright,\titlepostop);%
+    \draw[color=black,line width=2pt]
+    (\titleposleft,\titleposbottom)
+    --
+    (\titleposright,\titleposbottom);%
+}
+
+\usetitlestyle{ImpaFilled}
+
+\gdef\TP@maketitle{%
+    \begin{minipage}[c]{0.75\linewidth}
+        \raggedright
+        {\bfseries\Huge\color{titlefgcolor}\@title\par}
+        \vspace{0.6em}
+        {\large\color{titlefgcolor}\inlinelist{\impa@authors}\par}
+        \ifx\impa@emails\empty\else
+            \vspace{0.3em}
+            {\small\ttfamily\color{titlefgcolor}\inlinelist{\impa@emails}\par}
+        \fi
+    \end{minipage}%
+    \hfill
+    \begin{minipage}[c]{0.20\linewidth}
+        \raggedleft
+        \ifx\impa@logo\empty\else
+            \includegraphics[width=\linewidth]{\impa@logo}
+        \fi
+    \end{minipage}%
+}
+
+% ==================================================
 % 8. CUSTOM ENVIRONMENTS
 % ==================================================
 \ExplSyntaxOn
@@ -200,6 +271,50 @@
 
 \AtBeginDocument{
     \renewcommand{\refname}{\vspace{-3cm}}
+}
+
+% ==================================================
+% 9. FOOTER COMMAND
+% ==================================================
+\RequirePackage{qrcode}
+
+\newlength{\impa@footerheight}
+\newlength{\impa@footerpad}
+\setlength{\impa@footerpad}{1.2cm}
+\setlength{\impa@footerheight}{4.5cm}
+
+\newcommand{\posterfooter}[2]{%
+    % Fundo colorido
+    \draw[draw=none, fill=impaTitleBG]
+        (-0.5\textwidth, -0.5\textheight)
+        rectangle
+        (0.5\textwidth, {-0.5\textheight + \impa@footerheight});
+
+    % Linha superior
+    \draw[line width=1.5pt, color=black]
+        (-0.5\textwidth, {-0.5\textheight + \impa@footerheight})
+        -- (0.5\textwidth, {-0.5\textheight + \impa@footerheight});
+
+    % Linha divisória vertical (75% | 25%)
+    \draw[line width=1pt, color=black]
+        ({0.5\textwidth - 0.22\textwidth}, {-0.5\textheight + \impa@footerheight - 0.3cm})
+        -- ({0.5\textwidth - 0.22\textwidth}, {-0.5\textheight + 0.3cm});
+
+    % Conteúdo esquerdo: referências
+    \node[
+        anchor=north west,
+        inner sep=\impa@footerpad,
+        text width={0.78\textwidth - 2\impa@footerpad},
+        align=left
+    ] at (-0.5\textwidth, {-0.5\textheight + \impa@footerheight}) {%
+        {\color{impaTextFG}#2}%
+    };
+
+    % Conteúdo direito: QR code
+    \node[anchor=center] 
+        at ({0.5\textwidth - 0.11\textwidth}, {-0.5\textheight + 0.5\impa@footerheight}) {%
+        \qrcode[height=3.5cm]{#1}%
+    };
 }
 
 \endinput
