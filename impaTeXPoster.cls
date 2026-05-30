@@ -36,6 +36,10 @@
 \RequirePackage{xparse}
 \RequirePackage[most]{tcolorbox}
 
+% Carrega a fonte
+\RequirePackage{lmodern}                      
+\renewcommand{\familydefault}{\sfdefault}
+
 % ==================================================
 % 4b. TITLE METADATA COMMANDS
 % ==================================================
@@ -58,6 +62,9 @@
 % ==================================================
 % 5. COLOR DEFINITIONS (Maria's Palette)
 % ==================================================
+% COR TESTE, Não USAR
+\definecolor{red_dev_test}{HTML}{FF0000}
+
 \definecolor{white}{HTML}{F3F3F3}
 \definecolor{black}{HTML}{000000}
 \definecolor{beige}{HTML}{CCC4AF}
@@ -107,6 +114,7 @@
 \colorlet{impaTextFG}{black}
 \colorlet{impaBlockBG}{beige}
 \colorlet{impaTextTitle}{black}
+\colorlet{impaBorderBlock}{black}
 
 % 2. Aplica a paleta escolhida pelo usuário via if/else
 \ifthenelse{\equal{\impa@palette}{green}}{
@@ -129,6 +137,7 @@
     \colorlet{impaCanvas}{white}
     \colorlet{impaTitleBG}{white}
     \colorlet{impaBlockBG}{white}
+    \colorlet{impaBorderBlock}{white}
 }{
     % Caso seja 'basic' ou qualquer outra coisa
     \colorlet{impaTitleBG}{beige}
@@ -140,6 +149,7 @@
     \colorlet{impaCanvas}{black}
     \colorlet{impaTextFG}{white}
     \colorlet{impaTextTitle}{white}
+    \colorlet{impaBorderBlock}{black}
     
     \ifthenelse{\equal{\impa@palette}{none}}{
         \colorlet{impaTitleBG}{black}
@@ -148,6 +158,7 @@
         \ifthenelse{\equal{\impa@palette}{basic}}{
             \colorlet{impaTitleBG}{gray}
             \colorlet{impaBlockBG}{black!80}
+            \colorlet{impaBorderBlock}{black!80}
         }{
             % Para paletas coloridas (green, pink, etc.) no modo dark:
             \colorlet{impaTextFG}{black} 
@@ -161,7 +172,7 @@
 % Agora sim o Tikzposter lê as cores reais mapeadas diretamente!
 \definecolorstyle{impaThemeColors}{}{
     \colorlet{backgroundcolor}{impaCanvas}
-    \colorlet{framecolor}{impaTitleBG}
+    \colorlet{framecolor}{impaBorderBlock}
     \colorlet{titlebgcolor}{impaTitleBG}
     \colorlet{titlefgcolor}{impaTextTitle}        
     \colorlet{blocktitlebgcolor}{impaTitleBG}
