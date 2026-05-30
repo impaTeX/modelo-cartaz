@@ -46,12 +46,12 @@
 \RequirePackage{graphicx}
 
 % Logo direita
-\newcommand{\posterlogo}[1]{\def\impa@rightlogo{#1}}
-\def\impa@rightlogo{}
+\newcommand{\posterlogo}[1]{\def\impa@leftlogo{#1}}
+\def\impa@leftlogo{}
 
 % Logo esquerda
-\newcommand{\leftposterlogo}[1]{\def\impa@leftlogo{#1}}
-\def\impa@leftlogo{}
+\newcommand{\rightposterlogo}[1]{\def\impa@rightlogo{#1}}
+\def\impa@rightlogo{}
 
 % Autores e emails como listas separadas por \\
 \renewcommand{\author}[1]{\def\impa@authors{#1}}
@@ -227,52 +227,38 @@
 \noindent
 \makebox[\linewidth]{%
 
-% ======================================
-% LOGO ESQUERDA
-% ======================================
-
 \begin{minipage}[c][8cm][c]{0.2\linewidth}
     \centering
 
     \ifx\impa@leftlogo\empty\else
         \includegraphics[
-            height=6cm,
-            width=10cm,
+            height=20cm,
+            width=15cm,
             keepaspectratio
         ]{\impa@leftlogo}
     \fi
 \end{minipage}
 %
 \begin{minipage}[c][8cm][c]{0.6\linewidth}
-    \centering
-    \hspace*{-1cm}
+\centering
 
-    % TÍTULO
-    {\bfseries
-    \fontsize{82}{48}\selectfont
-    \color{titlefgcolor}
-    \@title\par}
+{
+\fontsize{82}{90}\selectfont
+\color{titlefgcolor}
+\@title\par}
 
-    \vspace{0.6em}
+\vspace{0.6em}
 
-    % AUTORES
-    \begin{center}
-    {\fontsize{30}{60}\selectfont
-    \color{titlefgcolor}
-    \inlinelist{\impa@authors}\par}
-    \end{center}
+{\fontsize{40}{48}\selectfont
+\color{titlefgcolor}
+\inlinelist{\impa@authors}\par}
 
-    \ifx\impa@emails\empty\else
-        \vspace{0.3em}
+\vspace{0.3em}
 
-        % EMAILS
-        \begin{center}
-        {\fontsize{20}{30}\selectfont
-        \ttfamily
-        \color{titlefgcolor}
-        \inlinelist{\impa@emails}\par}
-        \end{center}
-    \fi
+{\fontsize{30}{36}\selectfont
+\color{titlefgcolor}
+\inlinelist{\impa@emails}\par}
+
 \end{minipage}
 %
 \begin{minipage}[c][8cm][c]{0.2\linewidth}
@@ -280,7 +266,7 @@
 
     \ifx\impa@rightlogo\empty\else
         \includegraphics[
-            height=5cm,
+            height=7cm,
             width=15cm,
             keepaspectratio
         ]{\impa@rightlogo}
@@ -335,6 +321,17 @@
     \endgroup
 }
 {}
+
+\newcommand{\plainblock}[1]{%
+    \begingroup
+    \colorlet{blockbodybgcolor}{backgroundcolor}
+    \colorlet{framecolor}{backgroundcolor}
+
+    \block{}{
+        #1
+    }
+    \endgroup
+}
 
 \AtBeginDocument{
     \renewcommand{\refname}{\vspace{-3cm}}

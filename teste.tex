@@ -3,12 +3,13 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{lipsum}
+\usepackage{graphicx}
 
 \title{Poster Teste}
-\author{Bruno Pereira, Maria Silva, João Souza}
-\authoremail{bruno@impa.br, maria@impa.br, joao@impa.br}
-\leftposterlogo{impa.png}
-\posterlogo{logo.png}
+\author{Bruno Pereira, Igor Zwirtes}
+\authoremail{al.bruno.paula@impatech.edu.br, al.igor.zwirtes@impatech.edu.br}
+\posterlogo{impatech.png}
+\rightposterlogo{tex.png} % Logo do evento, caso houver
 
 \begin{document}
 \maketitle
@@ -16,15 +17,29 @@
 \begin{columns}
 
 % ==========================================
-% LEFT COLUMN
+% COLUNA 1
 % ==========================================
-\column{0.5}
+\column{0.4}
 
 \begin{postercard}[beige,white,black,black]{Introdução}
 Este é um exemplo de seção usando a classe ImpaTeXPoster.
+% primeiro parâmetro é a cor do Fundo do título
+% segundo parâmetro é a cor do do testo
+% terceiro parâmetro é cor do texto
+% quarto parâmetro é a borda do postercard
 
 \lipsum[1]
+\lipsum[1]
 \end{postercard}
+
+\plainblock{
+    \centering
+    \includegraphics[width=0.9\linewidth]{lora.png}
+
+    \vspace{0.3cm}
+
+    {\small Figura 1: Arquitetura utilizada para o treinamento com LoRA.}
+}
 
 \begin{postercard}[beige,white,black,black]{Objetivo}
 Mostrar como usar diferentes cores no ambiente.
@@ -32,22 +47,51 @@ Mostrar como usar diferentes cores no ambiente.
 \lipsum[2]
 \end{postercard}
 
+\begin{postercard}[beige,white,black,black]{Metodologia}
+Mostrar como usar diferentes cores no ambiente.
+
+\lipsum[2]
+\end{postercard}
+
 % ==========================================
-% RIGHT COLUMN
+%COLUNA 2
 % ==========================================
-\column{0.5}
+\column{0.4}
+
+\begin{postercard}[beige,white,black,black]{Experimentos}
+Este é um exemplo de seção usando a classe ImpaTeXPoster.
+
+\lipsum[1]
+\end{postercard}
+
+\plainblock{
+    \centering
+    \includegraphics[width=0.9\linewidth]{llm.jpg}
+
+    \vspace{0.3cm}
+
+    {\small Figura 2: Pipeline geral de text to SQL.}
+}
 
 \begin{postercard}[beige,white,black,black]{Resultados}
+Mostrar como usar diferentes cores no ambiente.
+
+\lipsum[2]
+\lipsum[1]
 \lipsum[3]
 \end{postercard}
 
-% primeiro parâmetro é a cor do Fundo do título
-% segundo parâmetro é a cor do do testo
-% terceiro parâmetro é cor do texto
-% quarto parâmetro é a borda do postercard
+% ==========================================
+% COLUNA 3
+% ==========================================
+\column{0.2}
 
-\begin{postercard}[beige,white,black,black]{Resultados}
+\begin{postercard}[beige,white,black,black]{Conclusão}
 \lipsum[4]
+\end{postercard}
+
+\begin{postercard}[beige,white,black,black]{Trabalhos futuros}
+\lipsum[3]
 \end{postercard}
 
 \begin{postercard}[beige,white,black,black]{Referências}
@@ -64,6 +108,21 @@ CHALMERS, A. F.
 \textit{O que é ciência, afinal?}
 São Paulo: Brasiliense, 1999.
 
+\bibitem{popper}
+POPPER, Karl.
+\textit{A lógica da pesquisa científica}.
+São Paulo: Cultrix, 2002.
+
+\bibitem{chalmers}
+CHALMERS, A. F.
+\textit{O que é ciência, afinal?}
+São Paulo: Brasiliense, 1999.
+
+\bibitem{popper}
+POPPER, Karl.
+\textit{A lógica da pesquisa científica}.
+São Paulo: Cultrix, 2002.
+
 \end{thebibliography}
 
 \end{postercard}
@@ -72,15 +131,33 @@ São Paulo: Brasiliense, 1999.
 
 \posterfooter{https://github.com/impaTeX/modelo-cartaz/}{%
     \begin{thebibliography}{99}
-    \bibitem{popper}
-    POPPER, Karl.
-    \textit{A lógica da pesquisa científica}.
-    São Paulo: Cultrix, 2002.
+    \bibitem{qwen2.5}
+    YANG, A. et al.
+    \textit{Qwen2.5 Technical Report}
+    arXiv preprint arXiv:2412.15115, 2024.
 
-    \bibitem{chalmers}
-    CHALMERS, A. F.
-    \textit{O que é ciência, afinal?}
-    São Paulo: Brasiliense, 1999.
+    \bibitem{lora}
+    HU, E. J. et al.
+    \textit{LoRA: Low-Rank Adaptation of Large Language Models}
+    arXiv preprint arXiv:2106.09685, 2021.
+
+    \bibitem{spider}
+    YU, T. et al.
+    \textit{Spider: A large-scale human-labeled dataset for complex and
+    cross-domain semantic parsing and text-to-SQL task.}
+    Brussels: Association for Computational Linguistics, 2018.
+
+    \bibitem{mimiciii}
+    JOHNSON, A. E. W. et al.
+    \textit{MIMIC-III, a freely accessible critical care database.}
+    v. 3, n. 160035, 2016.
+
+    \bibitem{mimicsql}
+    WANG, P.; SHI, T.; REDDY, C. K.
+    \textit{Text-to-SQL generation for question answering on electronic
+    medical records.}
+    New York: ACM, 2020. p. 350--361.
+
     \end{thebibliography}
 }
 
