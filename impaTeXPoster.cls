@@ -302,6 +302,7 @@
       { 1 } { \colorlet{customTitleBG}{##1} }
       { 2 } { \colorlet{customTextBG}{##1} }
       { 3 } { \colorlet{customTextFG}{##1} }
+      { 4 } { \colorlet{customBorderBlock}{##1} }
     } { }
   }
 }
@@ -316,16 +317,19 @@
         \colorlet{blockbodybgcolor}{impaBlockBG}
         \colorlet{blocktitlefgcolor}{impaTextFG}
         \colorlet{blockbodyfgcolor}{impaTextFG}
+        \colorlet{framecolor}{impaBorderBlock}
     }{
         % Customizado por vírgula (Mapeia a partir das novas cores base)
         \colorlet{customTitleBG}{impaTitleBG}
         \colorlet{customTextBG}{impaBlockBG}
         \colorlet{customTextFG}{impaTextFG}
+        \colorlet{customBorderBlock}{impaBorderBlock}
         \parsepostercardcolors{#1}
         \colorlet{blocktitlebgcolor}{customTitleBG}
         \colorlet{blockbodybgcolor}{customTextBG}
         \colorlet{blocktitlefgcolor}{customTextFG}
         \colorlet{blockbodyfgcolor}{customTextFG}
+        \colorlet{framecolor}{customBorderBlock}
     }
     \block{#2}{#3}
     \endgroup

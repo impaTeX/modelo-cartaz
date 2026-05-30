@@ -1,4 +1,4 @@
-\documentclass[palette=pink,mode=light]{impaTeXPoster}
+\documentclass[palette=basic,mode=light]{impaTeXPoster}
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -20,13 +20,13 @@
 % ==========================================
 \column{0.5}
 
-\begin{postercard}{Introdução}
+\begin{postercard}[beige,white,black,black]{Introdução}
 Este é um exemplo de seção usando a classe ImpaTeXPoster.
 
 \lipsum[1]
 \end{postercard}
 
-\begin{postercard}{Objetivo}
+\begin{postercard}[beige,white,black,black]{Objetivo}
 Mostrar como usar diferentes cores no ambiente.
 
 \lipsum[2]
@@ -37,15 +37,20 @@ Mostrar como usar diferentes cores no ambiente.
 % ==========================================
 \column{0.5}
 
-\begin{postercard}{Resultados}
+\begin{postercard}[beige,white,black,black]{Resultados}
 \lipsum[3]
 \end{postercard}
 
-\begin{postercard}[black,black!85,white]{Resultados}
+% primeiro parâmetro é a cor do Fundo do título
+% segundo parâmetro é a cor do do testo
+% terceiro parâmetro é cor do texto
+% quarto parâmetro é a borda do postercard
+
+\begin{postercard}[beige,white,black,black]{Resultados}
 \lipsum[4]
 \end{postercard}
 
-\begin{postercard}{Referências}
+\begin{postercard}[beige,white,black,black]{Referências}
 
 \begin{thebibliography}{99}
 
