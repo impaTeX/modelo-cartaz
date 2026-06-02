@@ -1,119 +1,164 @@
-\documentclass[palette=basic, mode=dark]{impaTeXPoster}
-
-
-% ==================================================
-% Opções da classe
-% ==================================================
-%
-% A classe suporta dois sistemas principais de customização:
-%    palette = define a identidade visual dos cards gerados por padrão
-%              (independentemente da pallete escolhida é possivel forçar outras cores de cards
-%               ao usar o poster card com cores pré-definidas, ver exmplos no documento)
-%    mode    = controla o estilo global da interface (claro/escuro)
-%
-% --------------------------------------------------
-% PALETTES DISPONÍVEIS
-% --------------------------------------------------
-%
-% palette = none,
-%           green,
-%           pink,
-%           orange,
-%           yellow,
-%           basic
-%
-% --------------------------------------------------
-% MODOS DISPONÍVEIS
-% --------------------------------------------------
-%   mode = light, dark
-%
-% SINTA-SE LIVRE PARA TESTAR AS COMBINAÇÕES!
-% ==================================================
-
+\documentclass[palette=basic,mode=light]{impaTeXPoster}
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{lipsum} % só pra texto de exemplo
+\usepackage{lipsum}
+\usepackage{graphicx}
 
 \title{Poster Teste}
-\author{Maria Eduarda}
-\date{2026}
+\author{Bruno Pereira, Igor Zwirtes}
+\authoremail{al.bruno.paula@impatech.edu.br, al.igor.zwirtes@impatech.edu.br}
+\posterlogo{images/impatech.png}
+\rightposterlogo{images/tex.png} % Logo do evento, caso houver
 
 \begin{document}
-
-\begin{samepage} % Força página única
-
 \maketitle
 
-\begin{multicols}{2} % Define quantidade de colunas
-% ==================================================
-% EXEMPLO 1 — CARD PADRÃO
-% Usa automaticamente a palette escolhida
-% ==================================================
+\begin{columns}
 
-\begin{postercard}{Introdução}
+% ==========================================
+% COLUNA 1
+% ==========================================
+\column{0.4}
 
-Este card utiliza automaticamente as cores definidas pela combinação de
-\texttt{palette} e \texttt{mode} da classe.
+\begin{postercard}[beige,white,black,black]{Introdução}
+Este é um exemplo de seção usando a classe ImpaTeXPoster.
+% primeiro parâmetro é a cor do Fundo do título
+% segundo parâmetro é a cor do do testo
+% terceiro parâmetro é cor do texto
+% quarto parâmetro é a borda do postercard
 
 \lipsum[1]
-
+\lipsum[1]
 \end{postercard}
 
-\vspace{1em}
+\plainblock{
+    \centering
+    \includegraphics[width=0.9\linewidth]{images/lora.png}
 
-% ==================================================
-% EXEMPLO 2 — CARD CUSTOMIZADO
-% Ignora a palette da classe
-% ==================================================
+    \vspace{0.3cm}
 
-\begin{postercard}[orange][yellow50][black]{Objetivo}
+    {\small Figura 1: Arquitetura utilizada para o treinamento com LoRA.}
+}
 
-Este card utiliza cores definidas manualmente pelo usuário, independentemente
-da palette global da classe.
+\begin{postercard}[beige,white,black,black]{Objetivo}
+Mostrar como usar diferentes cores no ambiente.
 
 \lipsum[2]
-
 \end{postercard}
 
-\vspace{1em}
+\begin{postercard}[beige,white,black,black]{Metodologia}
+Mostrar como usar diferentes cores no ambiente.
 
+\lipsum[2]
+\end{postercard}
 
-\vspace{1em}
+% ==========================================
+%COLUNA 2
+% ==========================================
+\column{0.4}
 
-\begin{postercard}[green][pink50][black]{Resultados}
+\begin{postercard}[beige,white,black,black]{Experimentos}
+Este é um exemplo de seção usando a classe ImpaTeXPoster.
 
+\lipsum[1]
+\end{postercard}
+
+\plainblock{
+    \centering
+    \includegraphics[width=0.9\linewidth]{images/llm.jpg}
+
+    \vspace{0.3cm}
+
+    {\small Figura 2: Pipeline geral de text to SQL.}
+}
+
+\begin{postercard}[beige,white,black,black]{Resultados}
+Mostrar como usar diferentes cores no ambiente.
+
+\lipsum[2]
+\lipsum[1]
 \lipsum[3]
 \end{postercard}
 
-\vspace{1em}
+% ==========================================
+% COLUNA 3
+% ==========================================
+\column{0.2}
 
-\begin{postercard}{Conclusão}
-
-O comportamento visual deste card muda automaticamente quando
-\texttt{mode=dark} é ativado.
-
+\begin{postercard}[beige,white,black,black]{Conclusão}
 \lipsum[4]
-
 \end{postercard}
 
-% Referências
+\begin{postercard}[beige,white,black,black]{Trabalhos futuros}
+\lipsum[3]
+\end{postercard}
+
+\begin{postercard}[beige,white,black,black]{Referências}
+
 \begin{thebibliography}{99}
 
 \bibitem{popper}
 POPPER, Karl.
 \textit{A lógica da pesquisa científica}.
-São Paulo: Cultrix, 2002.u
+São Paulo: Cultrix, 2002.
 
 \bibitem{chalmers}
 CHALMERS, A. F.
 \textit{O que é ciência, afinal?}
 São Paulo: Brasiliense, 1999.
 
+\bibitem{popper}
+POPPER, Karl.
+\textit{A lógica da pesquisa científica}.
+São Paulo: Cultrix, 2002.
+
+\bibitem{chalmers}
+CHALMERS, A. F.
+\textit{O que é ciência, afinal?}
+São Paulo: Brasiliense, 1999.
+
+\bibitem{popper}
+POPPER, Karl.
+\textit{A lógica da pesquisa científica}.
+São Paulo: Cultrix, 2002.
+
 \end{thebibliography}
 
-\end{multicols}
+\end{postercard}
 
-\end{samepage}
+\end{columns}
+
+\posterfooter{https://github.com/impaTeX/modelo-cartaz/}{%
+    \begin{thebibliography}{99}
+    \bibitem{qwen2.5}
+    YANG, A. et al.
+    \textit{Qwen2.5 Technical Report}
+    arXiv preprint arXiv:2412.15115, 2024.
+
+    \bibitem{lora}
+    HU, E. J. et al.
+    \textit{LoRA: Low-Rank Adaptation of Large Language Models}
+    arXiv preprint arXiv:2106.09685, 2021.
+
+    \bibitem{spider}
+    YU, T. et al.
+    \textit{Spider: A large-scale human-labeled dataset for complex and
+    cross-domain semantic parsing and text-to-SQL task.}
+    Brussels: Association for Computational Linguistics, 2018.
+
+    \bibitem{mimiciii}
+    JOHNSON, A. E. W. et al.
+    \textit{MIMIC-III, a freely accessible critical care database.}
+    v. 3, n. 160035, 2016.
+
+    \bibitem{mimicsql}
+    WANG, P.; SHI, T.; REDDY, C. K.
+    \textit{Text-to-SQL generation for question answering on electronic
+    medical records.}
+    New York: ACM, 2020. p. 350--361.
+
+    \end{thebibliography}
+}
 
 \end{document}

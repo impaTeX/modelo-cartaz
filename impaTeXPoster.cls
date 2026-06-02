@@ -1,24 +1,20 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{impaTeXPoster}[2026/04/20 My Custom LaTeX Class]
-
-\LoadClass{article}
+\ProvidesClass{impaTeXPoster}[2026/05/21 My Custom LaTeX Class]
 
 % ==================================================
-% PACKAGES
+% 1. EARLY PACKAGES
 % ==================================================
-
-\RequirePackage{xcolor}
-\RequirePackage{xparse}
-\RequirePackage[most]{tcolorbox}
-\RequirePackage{multicol}
-\RequirePackage{geometry}
 \RequirePackage{kvoptions}
 \RequirePackage{ifthen}
+\RequirePackage{xcolor}
+
+\DeclareVoidOption*{
+    \PassOptionsToClass{\CurrentOption}{tikzposter}
+}
 
 % ==================================================
-% OPTIONS SYSTEM
+% 2. OPTIONS SYSTEM
 % ==================================================
-
 \SetupKeyvalOptions{
     family=impa,
     prefix=impa@
@@ -30,54 +26,62 @@
 \ProcessKeyvalOptions*
 
 % ==================================================
-% BASE COLORS
+% 3. LOAD BASE CLASS
 % ==================================================
+\LoadClass[a0paper,portrait]{tikzposter}
+
+% ==================================================
+% 4. LATE PACKAGES
+% ==================================================
+\RequirePackage{xparse}
+\RequirePackage[most]{tcolorbox}
+
+% Carrega a fonte
+\RequirePackage{lmodern}                      
+\renewcommand{\familydefault}{\sfdefault}
+
+% ==================================================
+% 4b. TITLE METADATA COMMANDS
+% ==================================================
+\RequirePackage{graphicx}
+
+% Logo direita
+\newcommand{\posterlogo}[1]{\def\impa@leftlogo{#1}}
+\def\impa@leftlogo{}
+
+% Logo esquerda
+\newcommand{\rightposterlogo}[1]{\def\impa@rightlogo{#1}}
+\def\impa@rightlogo{}
+
+% Autores e emails como listas separadas por \\
+\renewcommand{\author}[1]{\def\impa@authors{#1}}
+\newcommand{\authoremail}[1]{\def\impa@emails{#1}}
+\def\impa@authors{}
+\def\impa@emails{}
+
+% ==================================================
+% 5. COLOR DEFINITIONS (Maria's Palette)
+% ==================================================
+% COR TESTE, Não USAR
+\definecolor{red_dev_test}{HTML}{FF0000}
 
 \definecolor{white}{HTML}{F3F3F3}
 \definecolor{black}{HTML}{000000}
-
 \definecolor{beige}{HTML}{CCC4AF}
 \definecolor{pink}{HTML}{FF8AEF}
 \definecolor{orange}{HTML}{FFC555}
 \definecolor{yellow}{HTML}{ECF47A}
 \definecolor{green}{HTML}{BEFF88}
 
-% IMPORTANTE: SE TIVER COM DÚVIDA NO CÓDIGO, FALAR COMIGO (BRUNO).
-% CRIEM BRANCHS SEPARADAS 
-% VAI TER MENSAGENS AO LOGO DO TEXTO, COMO SEU NOME (IGOR OU MARIA) E ALGUMA INSTRUÇÃO
-% MARIA VAI TER FOCO NA ESTÉTICA, E IGOR NA ESTRUTURA
-% Mantenham em inglês
-
-% SEÇÃO 1 DEFINIÇÃO DE TEMAS E DEFINIÇÂO DAS CORES USADAS
-
-% Definição de cores base (HEX ou RGB)
-\definecolor{beige}{HTML}{CCC4AF}
-\definecolor{white}{HTML}{F3F3F3}
-\definecolor{black}{HTML}{000000}
-\definecolor{pink}{HTML}{FF8AEF}
-\definecolor{orange}{HTML}{FFC555}
-\definecolor{yellow}{HTML}{ECF47A}
-\definecolor{green}{HTML}{BEFF88}
-
-% Definição de cores extendidas
-% ------------------- MARIA extende o espectro de cores de acordo com as  diretrizes -----------
-
-% Definindo paleta de cores do impatech estendida
-
-% =========================
-% PINK
-% =========================
+% Extended Pink
 \definecolor{pink50}{HTML}{F7BEF4}
 \definecolor{pink75}{HTML}{F59FED}
-\definecolor{pink100}{HTML}{FF8AEF} % já definida, mas se alguém tentar usar assim vai funcionar!
+\definecolor{pink100}{HTML}{FF8AEF}
 \definecolor{pink200}{HTML}{F073E0}
 \definecolor{pink300}{HTML}{E35DD4}
 \definecolor{pink400}{HTML}{D646C7}
 
-
-% =========================
-% YELLOW
-% =========================
+% Extended Yellow
 \definecolor{yellow50}{HTML}{F7F7B2}
 \definecolor{yellow75}{HTML}{F5F79B}
 \definecolor{yellow100}{HTML}{ECF47A}
@@ -85,9 +89,7 @@
 \definecolor{yellow300}{HTML}{EDEE40}
 \definecolor{yellow400}{HTML}{EEEA24}
 
-% =========================
-% ORANGE
-% =========================
+% Extended Orange
 \definecolor{orange50}{HTML}{F7D296}
 \definecolor{orange75}{HTML}{F7CB80}
 \definecolor{orange100}{HTML}{FFC555}
@@ -95,9 +97,7 @@
 \definecolor{orange300}{HTML}{F9AA41}
 \definecolor{orange400}{HTML}{FCA72B}
 
-% =========================
-% GREEN
-% =========================
+% Extended Green
 \definecolor{green50}{HTML}{DEF7C5}
 \definecolor{green75}{HTML}{D1FAAF}
 \definecolor{green100}{HTML}{BDF58B}
@@ -105,220 +105,288 @@
 \definecolor{green300}{HTML}{91F340}
 \definecolor{green400}{HTML}{7BEE1B}
 
-
-
-% Cores Funcionais Padrão
-\colorlet{MainColor}{beige}
-\colorlet{TextColor}{black}
-\colorlet{BackgroundColor}{white}
-\colorlet{MainTitle}{black}
-
-
 % ==================================================
-% DEFAULT FUNCTIONAL COLORS
+% 6. DYNAMIC PALETTE ALLOCATION (ESTRUTURA NOVA)
 % ==================================================
+% 1. Inicializa os nomes das cores com valores padrão (Fallback)
+\colorlet{impaCanvas}{white}
+\colorlet{impaTitleBG}{beige}
+\colorlet{impaTextFG}{black}
+\colorlet{impaBlockBG}{beige}
+\colorlet{impaTextTitle}{black}
+\colorlet{impaBorderBlock}{black}
 
-\colorlet{MainColor}{beige}
-\colorlet{TextColor}{black}
-\colorlet{BackgroundColor}{white}
-\colorlet{MainTitle}{black}
-
-\colorlet{TitleBackgroundColor}{beige}
-\colorlet{TextBackgroundColor}{beige}
-
-
-% ==================================================
-% PALETTES
-% ==================================================
-
-% -------------------------
-% BASIC
-% -------------------------
-
-\ifthenelse{\equal{\impa@palette}{basic}}{
-    \colorlet{TitleBackgroundColor}{beige}
-    \colorlet{TextBackgroundColor}{beige}
-}{}
-
-% -------------------------
-% GREEN
-% -------------------------
-
+% 2. Aplica a paleta escolhida pelo usuário via if/else
 \ifthenelse{\equal{\impa@palette}{green}}{
-    \colorlet{TitleBackgroundColor}{green}
-    \colorlet{TextBackgroundColor}{green50}
-}{}
-
-% -------------------------
-% PINK
-% -------------------------
-
-\ifthenelse{\equal{\impa@palette}{pink}}{
-    \colorlet{TitleBackgroundColor}{pink}
-    \colorlet{TextBackgroundColor}{pink50}
-}{}
-
-% -------------------------
-% ORANGE
-% -------------------------
-
-\ifthenelse{\equal{\impa@palette}{orange}}{
-    \colorlet{TitleBackgroundColor}{orange}
-    \colorlet{TextBackgroundColor}{orange50}
-}{}
-
-% -------------------------
-% YELLOW
-% -------------------------
-
-\ifthenelse{\equal{\impa@palette}{yellow}}{
-    \colorlet{TitleBackgroundColor}{yellow}
-    \colorlet{TextBackgroundColor}{yellow50}
-}{}
-
-% -------------------------
-% NONE
-% -------------------------
-
-\ifthenelse{\equal{\impa@palette}{none}}{
-    \colorlet{TitleBackgroundColor}{white}
-    \colorlet{TextBackgroundColor}{white}
-    \colorlet{MainColor}{white} 
-}{}
-
-% ==================================================
-% MODE SYSTEM
-% ==================================================
-
-\ifthenelse{\equal{\impa@mode}{dark}}{
-
-    % --------------------------------
-    % Global dark mode
-    % --------------------------------
-
-    \colorlet{MainColor}{black}
-    \colorlet{MainTitle}{white}
-    \colorlet{BackgroundColor}{black}
-
-    % --------------------------------
-    % NONE PALETTE
-    % Minimal dark mode
-    % --------------------------------
-
-    \ifthenelse{\equal{\impa@palette}{none}}{
-
-        \colorlet{TitleBackgroundColor}{black}
-        \colorlet{TextBackgroundColor}{black}
-        \colorlet{TextColor}{white}
-
-    }{
-
-        % --------------------------------
-        % BASIC PALETTE
-        % Old standard darkmode
-        % --------------------------------
-
-        \ifthenelse{\equal{\impa@palette}{basic}}{
-
-            \colorlet{TitleBackgroundColor}{gray}
-            \colorlet{TextBackgroundColor}{black!80}
-            \colorlet{TextColor}{white}
-
-        }{
-
-            % --------------------------------
-            % Colored palettes
-            % Keep colored backgrounds
-            % --------------------------------
-
-            \colorlet{TextColor}{black}
-
-        }
-
-    }
-
+    \colorlet{impaTitleBG}{green}
+    \colorlet{impaBlockBG}{green50}
 }{
-    % =================================
-    % LIGHT MODE
-    % =================================
+\ifthenelse{\equal{\impa@palette}{pink}}{
+    \colorlet{impaTitleBG}{pink}
+    \colorlet{impaBlockBG}{pink50}
+}{
+\ifthenelse{\equal{\impa@palette}{orange}}{
+    \colorlet{impaTitleBG}{orange}
+    \colorlet{impaBlockBG}{orange50}
+}{
+\ifthenelse{\equal{\impa@palette}{yellow}}{
+    \colorlet{impaTitleBG}{yellow}
+    \colorlet{impaBlockBG}{yellow50}
+}{
+\ifthenelse{\equal{\impa@palette}{none}}{
+    \colorlet{impaCanvas}{white}
+    \colorlet{impaTitleBG}{white}
+    \colorlet{impaBlockBG}{white}
+    \colorlet{impaBorderBlock}{white}
+}{
+    % Caso seja 'basic' ou qualquer outra coisa
+    \colorlet{impaTitleBG}{beige}
+    \colorlet{impaBlockBG}{beige}
+}}}}}
+
+% 3. Aplica a modificação do Modo Escuro (Dark Mode Override)
+\ifthenelse{\equal{\impa@mode}{dark}}{
+    \colorlet{impaCanvas}{black}
+    \colorlet{impaTextFG}{white}
+    \colorlet{impaTextTitle}{white}
+    \colorlet{impaBorderBlock}{black}
     
-    % Do nothing:
-    % palettes already define everything
+    \ifthenelse{\equal{\impa@palette}{none}}{
+        \colorlet{impaTitleBG}{black}
+        \colorlet{impaBlockBG}{black}
+    }{
+        \ifthenelse{\equal{\impa@palette}{basic}}{
+            \colorlet{impaTitleBG}{gray}
+            \colorlet{impaBlockBG}{black!80}
+            \colorlet{impaBorderBlock}{black!80}
+        }{
+            % Para paletas coloridas (green, pink, etc.) no modo dark:
+            \colorlet{impaTextFG}{black} 
+        }
+    }
+}{}
+
+% ==================================================
+% 7. TIKZPOSTER COMPATIBILITY LAYER
+% ==================================================
+% Agora sim o Tikzposter lê as cores reais mapeadas diretamente!
+\definecolorstyle{impaThemeColors}{}{
+    \colorlet{backgroundcolor}{impaCanvas}
+    \colorlet{framecolor}{impaBorderBlock}
+    \colorlet{titlebgcolor}{impaTitleBG}
+    \colorlet{titlefgcolor}{impaTextTitle}        
+    \colorlet{blocktitlebgcolor}{impaTitleBG}
+    \colorlet{blocktitlefgcolor}{impaTextFG}
+    \colorlet{blockbodybgcolor}{impaBlockBG}
+    \colorlet{blockbodyfgcolor}{impaTextFG}
 }
 
-\ProcessOptions\relax % Processa as options
+\usetheme{Basic}
+\usecolorstyle{impaThemeColors}
+\colorlet{titlebgcolor}{impaTitleBG}
+\colorlet{titlefgcolor}{impaTextTitle}
 
+% ==================================================
+% 7b. CUSTOM TITLE BLOCK
+% ==================================================
 
-% SEÇÃO 2 - CRIAR SEÇÕES E A ESTRUTURA BASE DAS SEÇÕES
-% ----------IGOR ----------- faça as seguinte modificações
+\newcommand{\impa@sep}{\quad\textbullet\quad}
 
+\newcommand{\inlinelist}[1]{%
+    \def\impa@first{1}%
+    \@for\impa@item:=#1\do{%
+        \if\impa@first1\def\impa@first{0}\else\impa@sep\fi
+        \impa@item
+    }%
+}
 
-
-% Definição do ambiente para o time implementar
-% Argumentos:
-% #1 = Cor do Título (Pílula) 
-% #2 = Cor do Fundo da Caixa 
-% #3 = Cor do Texto e Borda   
-% #4 = Título (Obrigatório)
-
-
-% Estrutura de box pronto, IGOR fica a vontade para modificar
-\NewDocumentEnvironment{postercard}{O{TitleBackgroundColor} O{TextBackgroundColor} O{TextColor} m}{%
-    \begin{tcolorbox}[
-        enhanced,
-        colback=#2,           % Fundo da caixa (suave)
-        colframe=#1,          % Borda da caixa (geralmente combina com a pílula)
-        coltitle=#3,          % Cor do texto do título (geralmente preto ou branco)
-        fonttitle=\bfseries\large,
-        coltext=#3,
-        title={#4},           % Texto do título
-        attach boxed title to top center={yshift=-3mm,yshifttext=-1mm},
-        boxed title style={
-            colback=#1,       % Fundo da pílula
-            arc=2mm,
-            outer arc=1mm,
-        },
-        arc=0mm,
-        boxrule=1.5pt,        % Borda um pouco mais grossa fica melhor em posters
-        top=4mm,
-    ]%
+% Novo titlestyle que usa titleposbottom/titlepostop (cobre exatamente o conteúdo)
+\definetitlestyle{ImpaFilled}{
+    width=\paperwidth,
+    roundedcorners=0,
+    linewidth=0pt,
+    innersep=1.5cm,
+    titletotopverticalspace=0mm,
+    titletoblockverticalspace=20mm,
+    titlegraphictotitledistance=10pt
 }{%
-    \end{tcolorbox}
+    \draw[draw=none,fill=titlebgcolor]
+    (\titleposleft,\titleposbottom)
+    rectangle
+    (\titleposright,\titlepostop);%
+    \draw[color=black,line width=2pt]
+    (\titleposleft,\titleposbottom)
+    --
+    (\titleposright,\titleposbottom);%
+}
+
+\usetitlestyle{ImpaFilled}
+
+\gdef\TP@maketitle{%
+
+\noindent
+\makebox[\linewidth]{%
+
+\begin{minipage}[c][8cm][c]{0.2\linewidth}
+    \centering
+
+    \ifx\impa@leftlogo\empty\else
+        \includegraphics[
+            height=20cm,
+            width=15cm,
+            keepaspectratio
+        ]{\impa@leftlogo}
+    \fi
+\end{minipage}
+%
+\begin{minipage}[c][8cm][c]{0.6\linewidth}
+\centering
+
+{
+\fontsize{82}{90}\selectfont
+\color{titlefgcolor}
+\@title\par}
+
+\vspace{0.6em}
+
+{\fontsize{40}{48}\selectfont
+\color{titlefgcolor}
+\inlinelist{\impa@authors}\par}
+
+\vspace{0.3em}
+
+{\fontsize{30}{36}\selectfont
+\color{titlefgcolor}
+\inlinelist{\impa@emails}\par}
+
+\end{minipage}
+%
+\begin{minipage}[c][8cm][c]{0.2\linewidth}
+    \centering
+
+    \ifx\impa@rightlogo\empty\else
+        \includegraphics[
+            height=7cm,
+            width=15cm,
+            keepaspectratio
+        ]{\impa@rightlogo}
+    \fi
+\end{minipage}
+
+}%
+}
+
+% ==================================================
+% 8. CUSTOM ENVIRONMENTS
+% ==================================================
+\ExplSyntaxOn
+\NewDocumentCommand{\parsepostercardcolors}{m}{
+  \int_zero:N \l_tmpa_int
+  \clist_map_inline:nn { #1 } {
+    \int_incr:N \l_tmpa_int
+    \int_case:nnF { \l_tmpa_int } {
+      { 1 } { \colorlet{customTitleBG}{##1} }
+      { 2 } { \colorlet{customTextBG}{##1} }
+      { 3 } { \colorlet{customTextFG}{##1} }
+      { 4 } { \colorlet{customBorderBlock}{##1} }
+    } { }
+  }
+}
+\ExplSyntaxOff
+
+\NewDocumentEnvironment{postercard}{O{} m +b}
+{
+    \begingroup
+    \ifthenelse{\equal{#1}{}}{
+        % Padrão: Usa a cor da paleta alocada dinamicamente
+        \colorlet{blocktitlebgcolor}{impaTitleBG}
+        \colorlet{blockbodybgcolor}{impaBlockBG}
+        \colorlet{blocktitlefgcolor}{impaTextFG}
+        \colorlet{blockbodyfgcolor}{impaTextFG}
+        \colorlet{framecolor}{impaBorderBlock}
+    }{
+        % Customizado por vírgula (Mapeia a partir das novas cores base)
+        \colorlet{customTitleBG}{impaTitleBG}
+        \colorlet{customTextBG}{impaBlockBG}
+        \colorlet{customTextFG}{impaTextFG}
+        \colorlet{customBorderBlock}{impaBorderBlock}
+        \parsepostercardcolors{#1}
+        \colorlet{blocktitlebgcolor}{customTitleBG}
+        \colorlet{blockbodybgcolor}{customTextBG}
+        \colorlet{blocktitlefgcolor}{customTextFG}
+        \colorlet{blockbodyfgcolor}{customTextFG}
+        \colorlet{framecolor}{customBorderBlock}
+    }
+    \block{#2}{#3}
+    \endgroup
+}
+{}
+
+\newcommand{\plainblock}[1]{%
+    \begingroup
+    \colorlet{blockbodybgcolor}{backgroundcolor}
+    \colorlet{framecolor}{backgroundcolor}
+
+    \block{}{
+        #1
+    }
+    \endgroup
 }
 
 \AtBeginDocument{
-    \pagecolor{BackgroundColor} % Aplica a cor da página para o darkmode funcionar
-    \color{TextColor}
-    \renewcommand{\refname}{Referências} % Mantém em português
+    \renewcommand{\refname}{\vspace{-3cm}}
 }
 
-% Personaliza o título
-\makeatletter
-\renewcommand{\maketitle}{
-    \begin{center}
-        {\Huge\bfseries \color{MainTitle} \@title \par}
-        \vspace{1em}
-        {\Large \color{MainTitle} \@author \par}
-        \vspace{0.5em}
-        {\large \color{MainTitle} \@date \par}
-    \end{center}
-    \vspace{2em}
+% ==================================================
+% 9. FOOTER COMMAND
+% ==================================================
+\RequirePackage{qrcode}
+
+\newlength{\impa@footerheight}
+\newlength{\impa@footerpad}
+\setlength{\impa@footerpad}{1.2cm}
+
+\newlength{\impa@qrsize}
+\setlength{\impa@qrsize}{4cm}
+
+\newlength{\impa@footerdivision}
+\setlength{\impa@footerdivision}{0.16\textwidth}
+
+\setlength{\impa@footerheight}{\dimexpr\impa@qrsize + 2.4cm\relax}
+
+\newcommand{\posterfooter}[2]{%
+    % Fundo colorido
+    \draw[draw=none, fill=impaTitleBG]
+        (-0.5\textwidth, -0.5\textheight)
+        rectangle
+        (0.5\textwidth, {-0.5\textheight + \impa@footerheight});
+
+    % Linha superior
+    \draw[line width=1.5pt, color=black]
+        (-0.5\textwidth, {-0.5\textheight + \impa@footerheight})
+        -- (0.5\textwidth, {-0.5\textheight + \impa@footerheight});
+
+    % Linha divisória vertical (75% | 25%)
+    \draw[line width=1pt, color=black]
+        ({0.5\textwidth - \impa@footerdivision}, {-0.5\textheight + \impa@footerheight - 0.3cm})
+        -- ({0.5\textwidth - \impa@footerdivision}, {-0.5\textheight + 0.3cm});
+
+    % Conteúdo esquerdo: referências
+    \node[
+        anchor=west,
+        inner sep=\impa@footerpad,
+        text width={0.78\textwidth - 2\impa@footerpad},
+        align=left
+    ] at (-0.5\textwidth, {-0.5\textheight + 0.5\impa@footerheight}) {%
+        {\color{impaTextFG}#2}%
+    };
+
+    % Conteúdo direito: QR code
+    \node[anchor=center] 
+        at ({0.5\textwidth - 0.5\impa@footerdivision},
+            {-0.5\textheight + 0.5\impa@footerheight}) {%
+            \qrcode[height=\impa@qrsize]{#1}%
+        };
 }
-\makeatother
-
-% Remove a numeração de página
-\pagenumbering{gobble}
-
-%FORMATAÇÃO MEXER DEPOIS
-
-\setlength{\paperwidth}{210mm}
-\setlength{\paperheight}{297mm}
-\setlength{\textwidth}{160mm}
-\setlength{\textheight}{240mm}
-\setlength{\topmargin}{0pt}
-\setlength{\oddsidemargin}{0pt}
-\setlength{\evensidemargin}{0pt}
-\setlength{\headheight}{30pt}
-\setlength{\headsep}{30pt}
 
 \endinput
