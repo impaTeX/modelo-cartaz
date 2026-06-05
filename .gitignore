@@ -3,6 +3,7 @@
 *.fls
 *.log
 *.synctex.gz
+*.synctex(busy)
 *.toc
 *.out
 *.pdf
@@ -17,3 +18,7 @@ Thumbs.db
 
 dist/
 build/
+
+*.bbl
+*.blg
+*.synctex.gz
