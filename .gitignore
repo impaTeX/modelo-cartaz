@@ -2,8 +2,7 @@
 *.fdb_latexmk
 *.fls
 *.log
-*.synctex.gz
-*.synctex(busy)
+*.synctex*
 *.toc
 *.out
 *.pdf
@@ -19,6 +18,5 @@ Thumbs.db
 dist/
 build/
 
+*.bib.blg
 *.bbl
-*.blg
-*.synctex.gz
