@@ -3,13 +3,12 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{lipsum}
-\usepackage{graphicx}
 
-\title{Poster Teste}
-\author{Bruno Pereira, Igor Zwirtes}
-\authoremail{al.bruno.paula@impatech.edu.br, al.igor.zwirtes@impatech.edu.br}
+\title{Poster Teste da Silva}
+\author{Bruno Pereira, Igor Zwirtes, Marcos Melo}
+\authoremail{al.bruno.paula@impatech.edu.br, al.igor.zwirtes@impatech.edu.br, al.marcos.melo@impatech.edu.br}
 \posterlogo{images/impatech(big).png}
-\rightposterlogo{images/tex.png} % Logo do evento, caso houver
+\leftposterlogo{images/tex.png}
 
 \begin{document}
 \maketitle
@@ -23,22 +22,14 @@
 
 \begin{postercard}[beige,white,black,black]{Introdução}
 Este é um exemplo de seção usando a classe ImpaTeXPoster.
-% primeiro parâmetro é a cor do Fundo do título
-% segundo parâmetro é a cor do do testo
-% terceiro parâmetro é cor do texto
-% quarto parâmetro é a borda do postercard
 
 \lipsum[1]
 \lipsum[1]
 \end{postercard}
 
 \plainblock{
-    \centering
-    \includegraphics[width=0.9\linewidth]{images/lora.png}
-
-    \vspace{0.3cm}
-
-    {\small Figura 1: Arquitetura utilizada para o treinamento com LoRA.}
+    \posterfigure{0.9}{images/lora.png}%
+        {Arquitetura utilizada para o treinamento com LoRA.}{fig:lora}
 }
 
 \begin{postercard}[beige,white,black,black]{Objetivo}
@@ -54,7 +45,7 @@ Mostrar como usar diferentes cores no ambiente.
 \end{postercard}
 
 % ==========================================
-%COLUNA 2
+% COLUNA 2
 % ==========================================
 \column{0.4}
 
@@ -65,12 +56,8 @@ Este é um exemplo de seção usando a classe ImpaTeXPoster.
 \end{postercard}
 
 \plainblock{
-    \centering
-    \includegraphics[width=0.9\linewidth]{images/llm.jpg}
-
-    \vspace{0.3cm}
-
-    {\small Figura 2: Pipeline geral de text to SQL.}
+    \posterfigure{0.9}{images/llm.jpg}%
+        {Pipeline geral de \textit{text-to-SQL}.}{fig:llm}
 }
 
 \begin{postercard}[beige,white,black,black]{Resultados}
@@ -94,69 +81,53 @@ Mostrar como usar diferentes cores no ambiente.
 \lipsum[3]
 \end{postercard}
 
+% Referências no corpo: ordem alfabética (ABNT NBR 6023:2018)
 \begin{postercard}[beige,white,black,black]{Referências}
-
 \begin{thebibliography}{99}
 
-\bibitem{popper}
-POPPER, Karl.
-\textit{A lógica da pesquisa científica}.
-São Paulo: Cultrix, 2002.
-
 \bibitem{chalmers}
-CHALMERS, A. F.
+CHALMERS, A. F\@.
 \textit{O que é ciência, afinal?}
 São Paulo: Brasiliense, 1999.
 
 \bibitem{popper}
-POPPER, Karl.
-\textit{A lógica da pesquisa científica}.
-São Paulo: Cultrix, 2002.
-
-\bibitem{chalmers}
-CHALMERS, A. F.
-\textit{O que é ciência, afinal?}
-São Paulo: Brasiliense, 1999.
-
-\bibitem{popper}
-POPPER, Karl.
+POPPER, K\@.
 \textit{A lógica da pesquisa científica}.
 São Paulo: Cultrix, 2002.
 
 \end{thebibliography}
-
 \end{postercard}
 
 \end{columns}
 
+% Rodapé: QR code + referências completas (ABNT NBR 6023:2018)
 \posterfooter{https://github.com/impaTeX/modelo-cartaz/}{%
     \begin{thebibliography}{99}
-    \bibitem{qwen2.5}
-    YANG, A. et al.
-    \textit{Qwen2.5 Technical Report}
-    arXiv preprint arXiv:2412.15115, 2024.
 
     \bibitem{lora}
-    HU, E. J. et al.
-    \textit{LoRA: Low-Rank Adaptation of Large Language Models}
+    HU, E.~J\@. et al\@.
+    \textit{LoRA: Low-rank adaptation of large language models}.
     arXiv preprint arXiv:2106.09685, 2021.
 
-    \bibitem{spider}
-    YU, T. et al.
-    \textit{Spider: A large-scale human-labeled dataset for complex and
-    cross-domain semantic parsing and text-to-SQL task.}
-    Brussels: Association for Computational Linguistics, 2018.
-
     \bibitem{mimiciii}
-    JOHNSON, A. E. W. et al.
-    \textit{MIMIC-III, a freely accessible critical care database.}
-    v. 3, n. 160035, 2016.
+    JOHNSON, A.~E.~W\@. et al\@.
+    \textit{MIMIC-III, a freely accessible critical care database}.
+    v.~3, n.~160035, 2016.
 
     \bibitem{mimicsql}
-    WANG, P.; SHI, T.; REDDY, C. K.
-    \textit{Text-to-SQL generation for question answering on electronic
-    medical records.}
-    New York: ACM, 2020. p. 350--361.
+    WANG, P\@.; SHI, T\@.; REDDY, C.~K\@.
+    \textit{Text-to-SQL generation for question answering on electronic medical records}.
+    New York: ACM, 2020. p.~350--361.
+
+    \bibitem{qwen25}
+    YANG, A\@. et al\@.
+    \textit{Qwen2.5 technical report}.
+    arXiv preprint arXiv:2412.15115, 2024.
+
+    \bibitem{spider}
+    YU, T\@. et al\@.
+    \textit{Spider: A large-scale human-labeled dataset for complex and cross-domain semantic parsing and text-to-SQL task}.
+    Brussels: Association for Computational Linguistics, 2018.
 
     \end{thebibliography}
 }
