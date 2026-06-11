@@ -178,6 +178,7 @@
 \colorlet{impaBlockBG}{beige}
 \colorlet{impaTextTitle}{black}
 \colorlet{impaBorderBlock}{black}
+\colorlet{TitleColor}{black}
 
 \ifthenelse{\equal{\impa@palette}{green}}{
     \colorlet{impaTitleBG}{green}
@@ -212,6 +213,7 @@
     \colorlet{impaTextFG}{white}
     \colorlet{impaTextTitle}{white}
     \colorlet{impaBorderBlock}{black}
+    \colorlet{TitleColor}{white}
 
     \ifthenelse{\equal{\impa@palette}{none}}{
         \colorlet{impaTitleBG}{black}
@@ -223,6 +225,7 @@
             \colorlet{impaBorderBlock}{black!80}
         }{
             \colorlet{impaTextFG}{black}
+%            \colorlet{impaTextColor}{black}
         }
     }
 }{}
@@ -236,7 +239,7 @@
     \colorlet{titlebgcolor}{impaTitleBG}
     \colorlet{titlefgcolor}{impaTextTitle}
     \colorlet{blocktitlebgcolor}{impaTitleBG}
-    \colorlet{blocktitlefgcolor}{impaTextFG}
+    \colorlet{blocktitlefgcolor}{TitleColor}
     \colorlet{blockbodybgcolor}{impaBlockBG}
     \colorlet{blockbodyfgcolor}{impaTextFG}
 }
@@ -321,6 +324,7 @@
       { 2 } { \colorlet{customTextBG}{##1} }
       { 3 } { \colorlet{customTextFG}{##1} }
       { 4 } { \colorlet{customBorderBlock}{##1} }
+      { 5 } { \colorlet{customTitleTextBlock}{##1} }
     } { }
   }
 }
@@ -332,7 +336,7 @@
     \ifthenelse{\equal{#1}{}}{
         \colorlet{blocktitlebgcolor}{impaTitleBG}
         \colorlet{blockbodybgcolor}{impaBlockBG}
-        \colorlet{blocktitlefgcolor}{impaTextFG}
+        \colorlet{blocktitlefgcolor}{TitleColor}
         \colorlet{blockbodyfgcolor}{impaTextFG}
         \colorlet{framecolor}{impaBorderBlock}
     }{
@@ -340,10 +344,11 @@
         \colorlet{customTextBG}{impaBlockBG}
         \colorlet{customTextFG}{impaTextFG}
         \colorlet{customBorderBlock}{impaBorderBlock}
+        \colorlet{customTitleTextBlock}{TitleColor}
         \parsepostercardcolors{#1}
         \colorlet{blocktitlebgcolor}{customTitleBG}
         \colorlet{blockbodybgcolor}{customTextBG}
-        \colorlet{blocktitlefgcolor}{customTextFG}
+        \colorlet{blocktitlefgcolor}{customTitleTextBlock}
         \colorlet{blockbodyfgcolor}{customTextFG}
         \colorlet{framecolor}{customBorderBlock}
     }
