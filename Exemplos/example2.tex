@@ -4,10 +4,11 @@
 \usepackage[T1]{fontenc}
 \usepackage{lipsum}
 
-\title{Poster Teste}
-\author{Bruno Pereira, Maria Silva, João Souza}
-\authoremail{bruno@impa.br, maria@impa.br, joao@impa.br}
-\leftposterlogo{images/impa.png}
+\title{A Critical Analysis of Branching Processes}
+%\subtitle{The Galton-Watson Model}
+\author{Bruno P. de Paula, Giovani F. Mota}
+\authoremail{al.bruno.paula@impatech.edu.br, al.giovani.mota@impatech.edu.br}
+\leftposterlogo{images/logos-impatech/padrao-dark.png}
 \posterlogo{images/logo.png}
 
 \begin{document}
@@ -20,16 +21,49 @@
 % ==========================================
 \column{0.5}
 
-\begin{postercard}[black,black,white,orange]{Introdução}
-Este é um exemplo de seção usando a classe ImpaTeXPoster.
-
-\lipsum[1]
+\begin{postercard}{Introduction}
+The Galton-Watson process is a fundamental tool in probabilistic mathematics. This mathematical construct was introduced by Galton and Watson in the 19th century, originally conceived to model the probability of hereditary surname extinction in England. However, their preliminary analysis yielded erroneous conclusions. In this work, we will critically re-examine their ideias in the first paper, comparing with modern results to identify the flaws in their investigation.
 \end{postercard}
 
-\begin{postercard}[black,black,white,orange]{Objetivo}
-Mostrar como usar diferentes cores no ambiente.
+\begin{postercard}{Methodology}
+This study analyzes the Galton-Watson paper by mapping its internal inconsistencies. We utilize three subsequent papers to highlight its flaws and apply modern results to demonstrate that the original paper's conclusions are erroneous.
+\end{postercard}
 
-\lipsum[2]
+\begin{postercard}{Critic Examination}
+This study analyzes the Galton-Watson paper by mapping its internal inconsistencies. We utilize three subsequent papers to highlight its flaws and apply modern results to demonstrate that the original paper's conclusions are erroneous.
+    \begin{itemize}
+        \item \textbf{Pioneering approach:} The original article represents the first attempt to formulate the problem of lineage extinction using probabilistic concepts.
+        \item \textbf{Limitations of the model:}
+        \begin{itemize}
+            \item Overlooks social and environmental influences on reproduction rates, assuming they are the same within a given family.
+            \item It assumed that different generations did not overlap and that the transition between them occurred in discrete time.
+            \item Focuses solely on male descendants, specifically in the subcritical case (average number of male offspring $<1$).
+        \end{itemize}
+        \item \textbf{Implications:} The model failed in its original purpose, suggesting extinction rates much lower than those observed in real populations.
+        \item \textbf{Historical significance:} Despite its limitations, the Galton-Watson model was later further developed and has been successfully applied to model phenomena in diverse scientific fields.
+    \end{itemize}
+\end{postercard}
+
+\begin{postercard}{Main results}
+
+Definitions:
+    
+    \begin{itemize}
+        \item \(Z_n\): size of the \(n\)-th generation (\(Z_0 = 1\))
+        \item \(p_k\): probability that an individual has \(k\) offspring
+        \item \(f(s)\): generating function of the offspring distribution
+        \item \(m\): mean number of offspring per individual
+        \item \(q\): extinction probability
+    \end{itemize}
+    
+Trivial Cases:
+    
+    \begin{itemize}
+        \item If \(p_0 = 0\), no individual can have zero offspring, hence \(q = 0\).
+        \item If \(p_0 > 0\) and \(p_1 = 1 - p_0\), each generation is at most the same size as the previous one, so the population inevitably dies out, hence \(q = 1\).
+        \item In all other cases, we assume \(p_0 > 0\) and \(p_i > 0\) for some \(i > 1\).
+    \end{itemize}
+
 \end{postercard}
 
 % ==========================================
@@ -37,34 +71,64 @@ Mostrar como usar diferentes cores no ambiente.
 % ==========================================
 \column{0.5}
 
-\begin{postercard}[black,black,white,orange]{Resultados}
-\lipsum[3]
+\begin{postercard}{{\normalsize Fundamental Lemas}}
+
+    \begin{itemize}
+    
+    \item \textbf{Lemma 1.}  
+    The generating function $f_n$ of \(Z_n\) is the \(n\)-th iterate of \(f\):
+    \[
+    f_n(s) = f^{(n)}(s).
+    \]
+    
+    \item \textbf{Lemma 2.}  
+    The expected size of the \(n\)-th generation is
+    \[
+    \mathbb{E}[Z_n] = m^n.
+    \]
+    
+    \item \textbf{Lemma 3.}  
+    The function \(f\) has at most two fixed points in \([0,1]\) (i.e., points $x$ such that $f(x)=x$), with $q$ being the smaller one and $1$ the larger (not necessarily distinct).
+    
+    \end{itemize}
+
 \end{postercard}
 
-% primeiro parâmetro é a cor do Fundo do título
-% segundo parâmetro é a cor do do testo
-% terceiro parâmetro é cor do texto
-% quarto parâmetro é a borda do postercard
 
-\begin{postercard}[black,black,white,orange]{Resultados}
-\lipsum[4]
+\begin{postercard}{Theorem — Extinction Criterion}
+
+If the mean number of offspring per individual satisfies \(m > 1\), then the extinction probability is strictly less than one (\(q < 1\)), meaning the population has a positive chance of survival.  
+If \(m \le 1\), then \(q = 1\), and extinction occurs almost surely.
+
 \end{postercard}
 
-\begin{postercard}[black,black,white,orange]{Referências}
+\begin{postercard}{Outline of the Proof}
 
-\begin{thebibliography}{99}
+\begin{enumerate}
+    \item To prove Lemma 1, use the rules of conditional expectation to express \(f_n\) in terms of \(f_{n-1}\). This allows a proof by induction.
+    \item Knowing the form of \(f_n\), an inductive proof of Lemma 2 can be obtained using the fact that \(\mathbb{E}[Z_n] = f'_n(1)\).
+    \item To prove Lemma 3, show that \(q = \lim f_n(0)\) is a fixed point of \(f\).
+    \item Use the monotonicity of \(f\) to prove that \(q\) is the smallest fixed point.
+    \item Assuming a non-trivial case, show that \(f\) is strictly convex and therefore has at most two fixed points.
+    \item Finally, to prove the Extinction Criterion, analyze the graph of \(f\) near \(s = 1\), considering the different cases according to the value of \(m\).
+\end{enumerate}
 
-\bibitem{popper}
-POPPER, Karl.
-\textit{A lógica da pesquisa científica}.
-São Paulo: Cultrix, 2002.
+\end{postercard}
 
-\bibitem{chalmers}
-CHALMERS, A. F.
-\textit{O que é ciência, afinal?}
-São Paulo: Brasiliense, 1999.
+\plainblock{
+    \posterfigure{0.9}{images/galton_watson_model.png}%
+        {The PGF $f(s)$ in the subcritical ($m < 1$), critical ($m = 1$), and supercritical ($m > 1$) cases.}{fig:galton_model}
+}
 
-\end{thebibliography}
+\begin{postercard}{Conclusion}
+
+\begin{enumerate}
+    \item \textbf{Extinction is not inevitable:} Modern mathematicians have proven that a population can survive indefinitely when the average number of offspring per individual exceeds 1, a case not studied by Galton and Watson, who considered only subcritical scenarios.
+
+    \item \textbf{New offspring distributions:} While the original paper examined cases with at most five offspring per individual, modern models allow arbitrary distributions: discrete, infinite, or even continuous, making the model applicable to more complex phenomena.
+
+    \item \textbf{Computational and numerical techniques:} Advances in both mathematical and computational tools enable the use of simulations and numerical methods to estimate population growth and extinction probabilities, often impractical to compute manually.
+\end{enumerate}
 
 \end{postercard}
 
