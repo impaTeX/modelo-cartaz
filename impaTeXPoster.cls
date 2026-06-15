@@ -136,21 +136,7 @@
 % ==================================================
 % 7. CAMADA DE COMPATIBILIDADE TIKZPOSTER
 % ==================================================
-\definecolorstyle{impaThemeColors}{}{
-    \colorlet{backgroundcolor}{impaCanvas}
-    \colorlet{framecolor}{impaBorderBlock}
-    \colorlet{titlebgcolor}{impaTitleBG}
-    \colorlet{titlefgcolor}{impaTextTitle}
-    \colorlet{blocktitlebgcolor}{impaTitleBG}
-    \colorlet{blocktitlefgcolor}{TitleColor}
-    \colorlet{blockbodybgcolor}{impaBlockBG}
-    \colorlet{blockbodyfgcolor}{impaTextFG}
-}
-
-\usetheme{Basic}
-\usecolorstyle{impaThemeColors}
-\colorlet{titlebgcolor}{impaTitleBG}
-\colorlet{titlefgcolor}{impaTextTitle}
+\RequirePackage{TikZCompatibility}
 
 % ==================================================
 % 7b. BLOCO DE TÍTULO CUSTOMIZADO

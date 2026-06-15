@@ -1,0 +1,24 @@
+% ==================================================
+% Tradução das variáveis de classe para variáveis TikZ
+% ==================================================
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{TikZCompatibility}[2026/06/15 TikZPoster Compatibility Layer]
+
+\RequirePackage{impaTechColors}
+
+\definecolorstyle{impaThemeColors}{}{
+    \colorlet{backgroundcolor}{impaCanvas}
+    \colorlet{framecolor}{impaBorderBlock}
+    \colorlet{titlebgcolor}{impaTitleBG}
+    \colorlet{titlefgcolor}{impaTextTitle}
+    \colorlet{blocktitlebgcolor}{impaTitleBG}
+    \colorlet{blocktitlefgcolor}{TitleColor}
+    \colorlet{blockbodybgcolor}{impaBlockBG}
+    \colorlet{blockbodyfgcolor}{impaTextFG}
+}
+
+\usetheme{Basic}
+\usecolorstyle{impaThemeColors}
+\colorlet{titlebgcolor}{impaTitleBG}
+\colorlet{titlefgcolor}{impaTextTitle}
