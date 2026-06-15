@@ -1,0 +1,74 @@
+% ==================================================
+% Dynamic palette sets for ImpaTech posters
+% ==================================================
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{dynamicPalette}[2026/06/15 ImpaTech Official Color Palette]
+
+\RequirePackage{ifthen}
+\RequirePackage{impaTechColors}
+
+
+% Standard color definitions
+\colorlet{impaCanvas}{white}
+\colorlet{impaTitleBG}{beige}
+\colorlet{impaTextFG}{black}
+\colorlet{impaBlockBG}{beige}
+\colorlet{impaTextTitle}{black}
+\colorlet{impaBorderBlock}{black}
+\colorlet{TitleColor}{black}
+
+
+% Conditional palette definitios
+\ifthenelse{\equal{\impa@palette}{green}}{
+    \colorlet{impaTitleBG}{green}
+    \colorlet{impaBlockBG}{green50}
+}{
+\ifthenelse{\equal{\impa@palette}{pink}}{
+    \colorlet{impaTitleBG}{pink}
+    \colorlet{impaBlockBG}{pink50}
+}{
+\ifthenelse{\equal{\impa@palette}{orange}}{
+    \colorlet{impaTitleBG}{orange}
+    \colorlet{impaBlockBG}{orange50}
+}{
+\ifthenelse{\equal{\impa@palette}{yellow}}{
+    \colorlet{impaTitleBG}{yellow}
+    \colorlet{impaBlockBG}{yellow50}
+}{
+\ifthenelse{\equal{\impa@palette}{none}}{
+    \colorlet{impaCanvas}{white}
+    \colorlet{impaTitleBG}{white}
+    \colorlet{impaBlockBG}{white}
+    \colorlet{impaBorderBlock}{white}
+}{
+    % paleta basic
+    \colorlet{impaTitleBG}{beige}
+    \colorlet{impaBlockBG}{beige}
+}}}}}
+
+
+% Dark mode palette overide
+\ifthenelse{\equal{\impa@mode}{dark}}{
+    \colorlet{impaCanvas}{black}
+    \colorlet{impaTextFG}{white}
+    \colorlet{impaTextTitle}{white}
+    \colorlet{impaBorderBlock}{black}
+    \colorlet{TitleColor}{white}
+
+    \ifthenelse{\equal{\impa@palette}{none}}{
+        \colorlet{impaTitleBG}{black}
+        \colorlet{impaBlockBG}{black}
+    }{
+        \ifthenelse{\equal{\impa@palette}{basic}}{
+            \colorlet{impaTitleBG}{gray}
+            \colorlet{impaBlockBG}{black!80}
+            \colorlet{impaBorderBlock}{black!80}
+        }{
+            \colorlet{impaTextFG}{black}
+%            \colorlet{impaTextColor}{black}
+        }
+    }
+}{}
+
+\endinput

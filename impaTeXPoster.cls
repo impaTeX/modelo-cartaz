@@ -126,109 +126,12 @@
 % ==================================================
 % 5. DEFINIÇÃO DE CORES (Paleta Maria)
 % ==================================================
-% COR DE TESTE — não usar em produção
-\definecolor{red_dev_test}{HTML}{FF0000}
-
-\definecolor{white}{HTML}{F3F3F3}
-\definecolor{black}{HTML}{000000}
-\definecolor{beige}{HTML}{CCC4AF}
-\definecolor{pink}{HTML}{FF8AEF}
-\definecolor{orange}{HTML}{FFC555}
-\definecolor{yellow}{HTML}{ECF47A}
-\definecolor{green}{HTML}{BEFF88}
-
-% Extended Pink
-\definecolor{pink50}{HTML}{F7BEF4}
-\definecolor{pink75}{HTML}{F59FED}
-\definecolor{pink100}{HTML}{FF8AEF}
-\definecolor{pink200}{HTML}{F073E0}
-\definecolor{pink300}{HTML}{E35DD4}
-\definecolor{pink400}{HTML}{D646C7}
-
-% Extended Yellow
-\definecolor{yellow50}{HTML}{F7F7B2}
-\definecolor{yellow75}{HTML}{F5F79B}
-\definecolor{yellow100}{HTML}{ECF47A}
-\definecolor{yellow200}{HTML}{EDF15D}
-\definecolor{yellow300}{HTML}{EDEE40}
-\definecolor{yellow400}{HTML}{EEEA24}
-
-% Extended Orange
-\definecolor{orange50}{HTML}{F7D296}
-\definecolor{orange75}{HTML}{F7CB80}
-\definecolor{orange100}{HTML}{FFC555}
-\definecolor{orange200}{HTML}{F9B74B}
-\definecolor{orange300}{HTML}{F9AA41}
-\definecolor{orange400}{HTML}{FCA72B}
-
-% Extended Green
-\definecolor{green50}{HTML}{DEF7C5}
-\definecolor{green75}{HTML}{D1FAAF}
-\definecolor{green100}{HTML}{BDF58B}
-\definecolor{green200}{HTML}{A6F865}
-\definecolor{green300}{HTML}{91F340}
-\definecolor{green400}{HTML}{7BEE1B}
+\RequirePackage{impaTechColors}
 
 % ==================================================
 % 6. ALOCAÇÃO DINÂMICA DE PALETA
 % ==================================================
-\colorlet{impaCanvas}{white}
-\colorlet{impaTitleBG}{beige}
-\colorlet{impaTextFG}{black}
-\colorlet{impaBlockBG}{beige}
-\colorlet{impaTextTitle}{black}
-\colorlet{impaBorderBlock}{black}
-\colorlet{TitleColor}{black}
-
-\ifthenelse{\equal{\impa@palette}{green}}{
-    \colorlet{impaTitleBG}{green}
-    \colorlet{impaBlockBG}{green50}
-}{
-\ifthenelse{\equal{\impa@palette}{pink}}{
-    \colorlet{impaTitleBG}{pink}
-    \colorlet{impaBlockBG}{pink50}
-}{
-\ifthenelse{\equal{\impa@palette}{orange}}{
-    \colorlet{impaTitleBG}{orange}
-    \colorlet{impaBlockBG}{orange50}
-}{
-\ifthenelse{\equal{\impa@palette}{yellow}}{
-    \colorlet{impaTitleBG}{yellow}
-    \colorlet{impaBlockBG}{yellow50}
-}{
-\ifthenelse{\equal{\impa@palette}{none}}{
-    \colorlet{impaCanvas}{white}
-    \colorlet{impaTitleBG}{white}
-    \colorlet{impaBlockBG}{white}
-    \colorlet{impaBorderBlock}{white}
-}{
-    % paleta basic
-    \colorlet{impaTitleBG}{beige}
-    \colorlet{impaBlockBG}{beige}
-}}}}}
-
-% Override para modo escuro
-\ifthenelse{\equal{\impa@mode}{dark}}{
-    \colorlet{impaCanvas}{black}
-    \colorlet{impaTextFG}{white}
-    \colorlet{impaTextTitle}{white}
-    \colorlet{impaBorderBlock}{black}
-    \colorlet{TitleColor}{white}
-
-    \ifthenelse{\equal{\impa@palette}{none}}{
-        \colorlet{impaTitleBG}{black}
-        \colorlet{impaBlockBG}{black}
-    }{
-        \ifthenelse{\equal{\impa@palette}{basic}}{
-            \colorlet{impaTitleBG}{gray}
-            \colorlet{impaBlockBG}{black!80}
-            \colorlet{impaBorderBlock}{black!80}
-        }{
-            \colorlet{impaTextFG}{black}
-%            \colorlet{impaTextColor}{black}
-        }
-    }
-}{}
+\RequirePackage{dynamicPalette}
 
 % ==================================================
 % 7. CAMADA DE COMPATIBILIDADE TIKZPOSTER
