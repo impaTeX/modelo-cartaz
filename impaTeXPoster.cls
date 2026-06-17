@@ -6,7 +6,6 @@
 % ==================================================
 \RequirePackage{kvoptions}
 \RequirePackage{ifthen}
-\RequirePackage{xcolor}
 
 \DeclareVoidOption*{
     \PassOptionsToClass{\CurrentOption}{tikzposter}
@@ -31,26 +30,16 @@
 \LoadClass[a0paper,portrait]{tikzposter}
 
 % ==================================================
-% 4. LATE PACKAGES
+% 4. TYPOGRAPHY
 % ==================================================
-\RequirePackage{xparse}
-\RequirePackage[most]{tcolorbox}
-
 % Nova opção de fonte: Helvetica (sans-serif)
 \RequirePackage[scaled=0.92]{helvet} 
 \renewcommand{\familydefault}{\sfdefault}
 
-% ==================================================
-% 4a. FORMATAÇÃO GERAL — Margens, colunas, blocos
-% ==================================================
-
+% Tamanho padrão da fonte
 \renewcommand{\normalsize}{%
     \fontsize{28}{36}\selectfont
 }
-
-% ==================================================
-% 4b. PARÁGRAFOS E ESPAÇAMENTO (ABNT adaptado a poster)
-% ==================================================
 
 % ABNT NBR 14724 §5.3: recuo de 1,25 cm na primeira linha
 % Em pôster, é aceitável trocar por espaço entre parágrafos
@@ -59,45 +48,9 @@
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0.6em}
 
-% Espaçamento de lista (evitar blocos compactos demais)
-\RequirePackage{enumitem}
-\setlist{
-    topsep    = 0.4em,
-    itemsep   = 0.2em,
-    parsep    = 0pt,
-    leftmargin= 1.8em
-}
-
 % ==================================================
-% 4c. LEGENDAS — ABNT NBR 14724 §5.8
+% 5. METADATA 
 % ==================================================
-% Formato: "Figura N – Descrição" (travessão, não dois-pontos)
-% Fonte: menor que o texto, negrito no rótulo
-\RequirePackage{caption}
-\captionsetup{
-    format        = plain,
-    labelsep      = endash, % " – " entre rótulo e texto
-    font          = {normal}, % corpo da legenda menor
-    labelfont     = {normal, bf}, % "Figura N" em negrito
-    justification = centering, % centralizado
-    singlelinecheck = false,
-    skip          = 6pt % espaço entre figura e legenda
-}
-% Legendas de tabela: acima (ABNT) — lembre de colocar \caption antes de \includegraphics nas tabelas
-\captionsetup[table]{position=above}
-\captionsetup[figure]{position=below}
-
-% Redefine os nomes para português (ABNT)
-\AtBeginDocument{%
-    \renewcommand{\figurename}{Figura}%
-    \renewcommand{\tablename}{Tabela}%
-}
-
-% ==================================================
-% 4d. TÍTULO DOS METADADOS
-% ==================================================
-\RequirePackage{graphicx}
-
 % Logo esquerda
 \newcommand{\posterlogo}[1]{\def\impa@rightlogo{#1}}
 \def\impa@rightlogo{}
@@ -113,28 +66,11 @@
 \def\impa@emails{}
 
 % ==================================================
-% 5. DEFINIÇÃO DE CORES (Paleta Maria)
+% 6. LOAD MODULES
 % ==================================================
-\RequirePackage{impaTechColors}
+\RequirePackage{impaTechColors} % Definição das cores oficiais do ImpaTech
+\RequirePackage{impaTexThemes} % Definição de temas da classe
+\RequirePackage{impaTeXLayout} % Definição do layout do poster (cabeçalho, colunas, etc.)
+\RequirePackage{impaTexComponents} % Definição dos ambientes personalisados (blocos de texto, referências, legendas, etc.)
 
-% ==================================================
-% 6. ALOCAÇÃO DINÂMICA DE PALETA
-% ==================================================
-\RequirePackage{impaTexThemes}
-
-
-% ==================================================
-% 7b. BLOCO DE TÍTULO CUSTOMIZADO
-% ==================================================
-\RequirePackage{impaTeXLayout}
-
-% ==================================================
-% 8. AMBIENTES CUSTOMIZADOS
-% ==================================================
-\RequirePackage{impaTexComponents}
-
-% ==================================================
-% 9. RODAPÉ (posterfooter)
-% ==================================================
-
-
+\endinput

@@ -5,8 +5,13 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{impaTexComponents}[2026/06/17 ImpaTex custom environments]
 
-\RequirePackage{graphicx}
 \RequirePackage{tikz}
+\RequirePackage{xparse}
+\RequirePackage{ifthen}
+\RequirePackage{xcolor}
+\RequirePackage{graphicx}
+\RequirePackage{caption}
+\RequirePackage{enumitem}
 % Tikzposter class required
 
 
@@ -88,6 +93,45 @@
     \captionof{figure}{#3}\label{#4}%
     \endgroup
 }
+
+% ==================================================
+% LISTA DE ITENS
+% ==================================================
+
+% Espaçamento de lista (evitar blocos compactos demais)
+\setlist{
+    topsep    = 0.4em,
+    itemsep   = 0.2em,
+    parsep    = 0pt,
+    leftmargin= 1.8em
+}
+
+
+% ==================================================
+% LEGENDAS
+% ==================================================
+% Formato: "Figura N – Descrição" (travessão, não dois-pontos)
+% Fonte: menor que o texto, negrito no rótulo
+\RequirePackage{caption}
+\captionsetup{
+    format        = plain,
+    labelsep      = endash, % " – " entre rótulo e texto
+    font          = {normal}, % corpo da legenda menor
+    labelfont     = {normal, bf}, % "Figura N" em negrito
+    justification = centering, % centralizado
+    singlelinecheck = false,
+    skip          = 6pt % espaço entre figura e legenda
+}
+% Legendas de tabela: acima (ABNT) — lembre de colocar \caption antes de \includegraphics nas tabelas
+\captionsetup[table]{position=above}
+\captionsetup[figure]{position=below}
+
+% Redefine os nomes para português (ABNT)
+\AtBeginDocument{%
+    \renewcommand{\figurename}{Figura}%
+    \renewcommand{\tablename}{Tabela}%
+}
+
 
 % ==================================================
 % REFERÊNCIAS — ABNT NBR 6023:2018
