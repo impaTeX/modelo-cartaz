@@ -137,7 +137,7 @@
 % ==================================================
 % 7b. BLOCO DE TÍTULO CUSTOMIZADO
 % ==================================================
-\RequirePackage{headerLayout}
+\RequirePackage{impaTeXLayout}
 
 % ==================================================
 % 8. AMBIENTES CUSTOMIZADOS
@@ -147,57 +147,5 @@
 % ==================================================
 % 9. RODAPÉ (posterfooter)
 % ==================================================
-\RequirePackage{qrcode}
 
-\newlength{\impa@footerpad}
-\setlength{\impa@footerpad}{1.2cm}
 
-\newlength{\impa@qrsize}
-\setlength{\impa@qrsize}{6cm}
-
-% Divisão vertical: coluna do QR à direita
-\newlength{\impa@footerdivision}
-\setlength{\impa@footerdivision}{0.16\textwidth}
-
-% Altura do rodapé: generosa o suficiente para 5+ referências
-% Ajuste este valor se as referências ainda forem cortadas.
-\newlength{\impa@footerheight}
-\setlength{\impa@footerheight}{10cm}
-
-% Largura útil da área de referências:
-% total - coluna QR - 2x padding horizontal
-\newlength{\impa@refwidth}
-\setlength{\impa@refwidth}{\dimexpr(1\textwidth - \impa@footerdivision - 2\impa@footerpad)\relax}
-
-\newcommand{\posterfooter}[2]{%
-    % Fundo colorido
-    \draw[draw=none, fill=impaTitleBG]
-        (-0.5\textwidth, -0.5\textheight)
-        rectangle
-        (0.5\textwidth, {-0.5\textheight + \impa@footerheight});
-    % Linha superior
-    \draw[line width=1.5pt, color=black]
-        (-0.5\textwidth, {-0.5\textheight + \impa@footerheight})
-        -- (0.5\textwidth, {-0.5\textheight + \impa@footerheight});
-    % Linha divisória vertical
-    \draw[line width=1pt, color=black]
-        ({0.5\textwidth - \impa@footerdivision},
-         {-0.5\textheight + \impa@footerheight - 0.3cm})
-        -- ({0.5\textwidth - \impa@footerdivision},
-            {-0.5\textheight + 0.3cm});
-    % Referências (esquerda) — âncora no topo para não cortar por baixo
-    \node[
-        anchor=north west,
-        inner sep=\impa@footerpad,
-        text width=\impa@refwidth,
-        align=left
-    ] at (-0.5\textwidth, {-0.5\textheight + \impa@footerheight})
-        {{\color{impaTextFG}\fontsize{20}{26}\selectfont #2}};
-    % QR code (direita)
-    \node[anchor=center]
-        at ({0.5\textwidth - 0.5\impa@footerdivision},
-            {-0.5\textheight + 0.5\impa@footerheight})
-        {\qrcode[height=\impa@qrsize]{#1}};
-}
-
-\endinput

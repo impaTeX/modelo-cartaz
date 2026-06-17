@@ -1,5 +1,5 @@
 % ==================================================
-% Define o layout padrão do cabeçalho do poster
+% Define os ambientes customizados do corpo do poster
 % ==================================================
 
 \NeedsTeXFormat{LaTeX2e}
@@ -9,6 +9,11 @@
 \RequirePackage{tikz}
 % Tikzposter class required
 
+
+
+% ==================================================
+% POSTERCARD LAYOUT
+% ==================================================
 
 \ExplSyntaxOn
 \NewDocumentCommand{\parsepostercardcolors}{m}{
@@ -63,7 +68,7 @@
 }
 
 % ==================================================
-% 8b. COMANDO \posterfigure — figura com legenda ABNT
+% COMANDO \posterfigure — figura com legenda ABNT
 % ==================================================
 % tikzposter NÃO suporta floats (figure, table com [H] etc.).
 % Uma solução é o \captionof{figure}{...} do pacote caption,
@@ -85,7 +90,7 @@
 }
 
 % ==================================================
-% 8c. REFERÊNCIAS — ABNT NBR 6023:2018
+% REFERÊNCIAS — ABNT NBR 6023:2018
 % ==================================================
 % Ordem alfabética (thebibliography já respeita a ordem manual;
 % o autor deve inserir em ordem)
