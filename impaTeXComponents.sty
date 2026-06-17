@@ -1,6 +1,9 @@
-% ==================================================
-% Define os ambientes customizados do corpo do poster
-% ==================================================
+% =====================================================================
+% FORMATAÇÃO & AMBIENTES CUSTOMIZADOS
+% ---------------------------------------------------------------------
+% Contém os blocos customizados, comandos de figuras e formatação ABNT 
+% para listas/legendas.
+% =====================================================================
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{impaTexComponents}[2026/06/17 ImpaTex custom environments]
@@ -14,12 +17,9 @@
 \RequirePackage{enumitem}
 % Tikzposter class required
 
-
-
 % ==================================================
 % POSTERCARD LAYOUT
 % ==================================================
-
 \ExplSyntaxOn
 \NewDocumentCommand{\parsepostercardcolors}{m}{
   \int_zero:N \l_tmpa_int
@@ -97,7 +97,6 @@
 % ==================================================
 % LISTA DE ITENS
 % ==================================================
-
 % Espaçamento de lista (evitar blocos compactos demais)
 \setlist{
     topsep    = 0.4em,
@@ -105,7 +104,6 @@
     parsep    = 0pt,
     leftmargin= 1.8em
 }
-
 
 % ==================================================
 % LEGENDAS
@@ -132,7 +130,6 @@
     \renewcommand{\tablename}{Tabela}%
 }
 
-
 % ==================================================
 % REFERÊNCIAS — ABNT NBR 6023:2018
 % ==================================================
@@ -142,7 +139,6 @@
 % Espaçamento simples entre linhas, linha em branco entre entradas
 % Rótulo numérico oculto (ABNT usa lista sem número visível,
 % mas em pôsteres o número [1] ajuda na citação — mantemos)
-
 \AtBeginDocument{%
     % Zera o título "Referências" dentro do postercard
     % (o título do bloco já serve de cabeçalho)
@@ -167,3 +163,5 @@
         \endlist
     }
 }
+
+\endinput

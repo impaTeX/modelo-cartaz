@@ -1,7 +1,9 @@
-% ==================================================
-% Define o layout padrão do poster
-% ==================================================
-
+% =====================================================================
+% LAYOUT
+% ---------------------------------------------------------------------
+% Define as medidas do pôster: margens, espaçamento entre colunas e o
+% desenho do Cabeçalho e Rodapé customizados.
+% =====================================================================
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{impaTeXLayout}[2026/06/17 Impatech Header and Footer layout]
 
@@ -10,12 +12,11 @@
 \RequirePackage{qrcode}
 \RequirePackage{impaTexThemes}
 \RequirePackage{xcolor}
-% Tikzposter class required
+% tikzposter class required
 
 % ==================================================
 % ESPAÇAMENTO BLOCO/MARGEM/COLUNA
 % ==================================================
-
 \providecommand{\tikzposterlatexaffectionprooffalse}{}
 \tikzposterlatexaffectionprooffalse
 
@@ -29,9 +30,8 @@
 
 
 % ==================================================
-% HEADER
+% CABEÇALHO/TÍTULO
 % ==================================================
-
 \newcommand{\impa@sep}{\quad\textbullet\quad}
 
 \newcommand{\inlinelist}[1]{%
@@ -92,9 +92,8 @@
 }
 
 % ==================================================
-% FOOTER
+% RODAPÉ
 % ==================================================
-
 \newlength{\impa@footerpad}
 \setlength{\impa@footerpad}{1.2cm}
 
