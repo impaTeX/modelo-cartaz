@@ -72,5 +72,6 @@
 \RequirePackage{impaTexThemes} % Definição de temas da classe
 \RequirePackage{impaTeXLayout} % Definição do layout do poster (cabeçalho, colunas, etc.)
 \RequirePackage{impaTexComponents} % Definição dos ambientes personalisados (blocos de texto, referências, legendas, etc.)
+\RequirePackage{impaTexSettings} % Definição de comandos de personalização globais
 
 \endinput
