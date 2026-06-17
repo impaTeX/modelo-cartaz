@@ -131,12 +131,8 @@
 % ==================================================
 % 6. ALOCAÇÃO DINÂMICA DE PALETA
 % ==================================================
-\RequirePackage{dynamicPalette}
+\RequirePackage{impaTexThemes}
 
-% ==================================================
-% 7. CAMADA DE COMPATIBILIDADE TIKZPOSTER
-% ==================================================
-\RequirePackage{TikZCompatibility}
 
 % ==================================================
 % 7b. BLOCO DE TÍTULO CUSTOMIZADO

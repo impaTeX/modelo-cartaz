@@ -3,7 +3,7 @@
 % ==================================================
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{dynamicPalette}[2026/06/15 Dynamic Palette Macros]
+\ProvidesPackage{impaTexThemes}[2026/06/15 Dynamic Palette Macros]
 
 \RequirePackage{ifthen}
 \RequirePackage{impaTechColors}
@@ -70,5 +70,26 @@
         }
     }
 }{}
+
+
+% ==================================================
+% Tradução dos temas para variáveis do tikzposter
+% ==================================================
+
+\definecolorstyle{impaThemeColors}{}{
+    \colorlet{backgroundcolor}{impaCanvas}
+    \colorlet{framecolor}{impaBorderBlock}
+    \colorlet{titlebgcolor}{impaTitleBG}
+    \colorlet{titlefgcolor}{impaTextTitle}
+    \colorlet{blocktitlebgcolor}{impaTitleBG}
+    \colorlet{blocktitlefgcolor}{TitleColor}
+    \colorlet{blockbodybgcolor}{impaBlockBG}
+    \colorlet{blockbodyfgcolor}{impaTextFG}
+}
+
+\usetheme{Basic}
+\usecolorstyle{impaThemeColors}
+\colorlet{titlebgcolor}{impaTitleBG}
+\colorlet{titlefgcolor}{impaTextTitle}
 
 \endinput
