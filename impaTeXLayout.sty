@@ -1,5 +1,5 @@
 % ==================================================
-% Define o layout padrão do cabeçalho e rodapé do poster
+% Define o layout padrão do poster
 % ==================================================
 
 \NeedsTeXFormat{LaTeX2e}
@@ -11,6 +11,22 @@
 \RequirePackage{impaTexThemes}
 \RequirePackage{xcolor}
 % Tikzposter class required
+
+% ==================================================
+% ESPAÇAMENTO BLOCO/MARGEM/COLUNA
+% ==================================================
+
+\providecommand{\tikzposterlatexaffectionprooffalse}{}
+\tikzposterlatexaffectionprooffalse
+
+\setlength{\TP@blockverticalspace}{1.5cm}
+
+\newlength{\impa@colspace}
+\setlength{\impa@colspace}{1.2cm}
+
+\newlength{\impa@blockinnersep}
+\setlength{\impa@blockinnersep}{1.2cm}
+
 
 % ==================================================
 % HEADER

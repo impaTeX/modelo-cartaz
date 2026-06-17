@@ -44,17 +44,6 @@
 % 4a. FORMATAÇÃO GERAL — Margens, colunas, blocos
 % ==================================================
 
-\providecommand{\tikzposterlatexaffectionprooffalse}{}
-\tikzposterlatexaffectionprooffalse
-
-\setlength{\TP@blockverticalspace}{1.5cm}
-
-\newlength{\impa@colspace}
-\setlength{\impa@colspace}{1.2cm}
-
-\newlength{\impa@blockinnersep}
-\setlength{\impa@blockinnersep}{1.2cm}
-
 \renewcommand{\normalsize}{%
     \fontsize{28}{36}\selectfont
 }
