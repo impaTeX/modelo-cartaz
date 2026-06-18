@@ -52,18 +52,22 @@
 % 5. METADATA 
 % ==================================================
 % Logo esquerda
-\newcommand{\posterlogo}[1]{\def\impa@rightlogo{#1}}
-\def\impa@rightlogo{}
+\newcommand{\posterlogo}[1]{\def\impa@leftlogo{#1}}
+\def\impa@leftlogo{}
 
 % Logo direita
-\newcommand{\leftposterlogo}[1]{\def\impa@leftlogo{#1}}
-\def\impa@leftlogo{}
+\newcommand{\rightposterlogo}[1]{\def\impa@rightlogo{#1}}
+\def\impa@rightlogo{}
 
 % Autores e emails
 \renewcommand{\author}[1]{\def\impa@authors{#1}}
 \newcommand{\authoremail}[1]{\def\impa@emails{#1}}
 \def\impa@authors{}
 \def\impa@emails{}
+
+% Subtítulo
+\newcommand{\subtitle}[1]{\def\impa@subtitle{#1}}
+\def\impa@subtitle{}
 
 % ==================================================
 % 6. LOAD MODULES
