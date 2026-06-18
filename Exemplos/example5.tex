@@ -4,6 +4,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{lipsum}
 
+
 \title{Poster Teste}
 \author{Bruno Pereira, Maria Silva, João Souza}
 \authoremail{bruno@impa.br, maria@impa.br, joao@impa.br}
@@ -14,44 +15,54 @@
 \maketitle
 
 \useblockstyle{testStyle}
-\setposterborder{blue}
+
 
 \begin{columns}
 
-% ==========================================
-% LEFT COLUMN
-% ==========================================
 \column{0.5}
 
-\begin{postercard}{Introdução}
-Este é um exemplo de seção usando a classe ImpaTeXPoster.
+\block{Introduction}{
+Compactness is one of the central notions in modern mathematics.
+It appears naturally in topology, analysis, geometry, and differential
+equations.
+}
 
-\lipsum[1]
-\end{postercard}
+\plainblock{
+\lipsum[1-3]
+}
 
-\begin{postercard}{Objetivo}
-Mostrar como usar diferentes cores no ambiente.
-
-\lipsum[2]
-\end{postercard}
-
-% ==========================================
-% RIGHT COLUMN
-% ==========================================
 \column{0.5}
 
-\begin{postercard}{Resultados}
+\block{Main Theorem}{
+Let $K$ be a compact subset of $\mathbb{R}^n$ and
+$f:K\to\mathbb{R}$ be continuous. Then $f$ attains a maximum and a
+minimum value on $K$.
+}
+
+\plainblock{  \textcolor{pink}{\textbf{Proof.}}
+Compactness allows one to extract convergent subsequences from bounded
+sequences, providing a bridge between local and global properties.
+
 \lipsum[3]
-\end{postercard}
+}
 
-% primeiro parâmetro é a cor do Fundo do título
-% segundo parâmetro é a cor do do testo
-% terceiro parâmetro é cor do texto
-% quarto parâmetro é a borda do postercard
+\plainblock{ \textcolor{pink}{\textbf{Historical Remark!}}
+The modern notion of compactness emerged gradually from the work of
+Bolzano, Weierstrass, Borel, and Lebesgue during the nineteenth century.
+}
 
-\begin{postercard}{Metodologia}
-\lipsum[4]
-\end{postercard}
+\block{Motivation}{
+Many existence theorems require compactness assumptions. For instance,
+continuous functions on compact sets attain their extrema.
+}
+\block{Applications}{
+\begin{itemize}
+    \item Extreme Value Theorem
+    \item Arzelà--Ascoli Theorem
+    \item Spectral Theory
+    \item Variational Methods
+\end{itemize}
+}
 
 \end{columns}
 
@@ -60,27 +71,90 @@ Mostrar como usar diferentes cores no ambiente.
 %Left Column
 \column{0.33}
 
-\begin{postercard}{Metodologia}
-\lipsum[5]
-\end{postercard}
+\block{Important Equation}{
+The heat equation is given by
+
+\[
+\frac{\partial u}{\partial t}
+=
+\alpha \nabla^2 u.
+\]
+
+where $\alpha$ is the thermal diffusivity.\\
+
+\lipsum[3][1-6]
+}
+
 
 %Middle Column
 \column{0.33}
 
-\begin{postercard}{Metodologia}
-\lipsum[6]
-\end{postercard}
+\block{Experimental Results}{
+\centering
+
+\begin{tabular}{lcc}
+\hline
+Method & Error & Time (s)\\
+\hline
+A & 0.014 & 1.2\\
+B & 0.008 & 1.8\\
+C & 0.005 & 2.4\\
+\hline
+\end{tabular}
+}
+\plainblock{\lipsum[1][1-4]}
 
 
 %Right Column
 \column{0.33}
 
 \begin{postercard}{Metodologia}
-\lipsum[7]
+\lipsum[7][1-16]
 \end{postercard}
 
 \end{columns}
 
+\begin{columns}
+\column{0.5}
+
+\plainblock{
+\textcolor{pink}{\textbf{Theorem.}}
+
+Let $K \subset \mathbb{R}^n$ be compact and
+$f:K\to\mathbb{R}$ continuous.
+
+Then $f$ attains its maximum and minimum values on $K$.
+
+}
+
+\plainblock{
+    \posterfigure{0.9}{images/lora.png}%
+        {Arquitetura utilizada para o treinamento com LoRA.}{fig:lora}
+}
+
+\column{0.5}
+
+
+
+\block{Workflow}{
+\begin{enumerate}
+\item Data acquisition
+\item Pre-processing
+\item Model training
+\item Evaluation
+\end{enumerate}
+}
+
+\plainblock{
+\lipsum[2][1-15]
+}
+
+\block{Conclusion}{
+We introduced a new framework for studying compactness
+and demonstrated several applications in analysis and topology.
+}
+
+\end{columns}
 
 \posterfooter{https://github.com/impaTeX/modelo-cartaz/}{%
 

@@ -21,26 +21,26 @@
 % ==================================================
 \defineblockstyle{testStyle}{
     % Parâmetros de posição
-    titlewidthscale=0.95,       %
+    titlewidthscale=1,       %
     bodywidthscale=1,           %
     titlecenter,                %
     titleoffsetx=0pt,           %
-    titleoffsety=0.8cm,         %
+    titleoffsety=4mm,           %
     bodyoffsetx=0pt,            %
     bodyoffsety=0pt,            %
     bodyverticalshift=0pt,      %
     roundedcorners=0,           %
-    linewidth=2pt,              %
-    titleinnersep=8mm,          %
-    bodyinnersep=1.2cm          %
+    linewidth=1mm,              % largura do contorno
+    titleinnersep=4mm,          % altura da barrinha de fundo do titulo em cada bloco
+    bodyinnersep=5mm            %
 }{
     % Desenho
     % Corpo
-    \draw[color=framecolor, fill=blockbodybgcolor, line width=\blocklinewidth]
+    \draw[color=blocktitlebgcolor, fill=blockbodybgcolor, line width=\blocklinewidth, rounded corners=2mm]
         (blockbody.south west) rectangle (blockbody.north east);
     % Título
     \ifBlockHasTitle
-        \draw[draw=none, fill=blocktitlebgcolor]
+        \draw[draw=none, fill=blocktitlebgcolor, rounded corners=4mm]
             (blocktitle.south west) rectangle (blocktitle.north east);
     \fi
 }
