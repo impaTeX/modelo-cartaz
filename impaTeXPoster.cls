@@ -52,12 +52,12 @@
 % 5. METADATA 
 % ==================================================
 % Logo esquerda
-\newcommand{\posterlogo}[1]{\def\impa@leftlogo{#1}}
-\def\impa@leftlogo{}
-
-% Logo direita
 \newcommand{\rightposterlogo}[1]{\def\impa@rightlogo{#1}}
 \def\impa@rightlogo{}
+
+% Logo direita
+\newcommand{\posterlogo}[1]{\def\impa@leftlogo{#1}}
+\def\impa@leftlogo{}
 
 % Autores e emails
 \renewcommand{\author}[1]{\def\impa@authors{#1}}

@@ -67,14 +67,21 @@
 \makebox[\linewidth]{%
 \begin{minipage}[c][8cm][c]{0.2\linewidth}
     \centering
-    \ifx\impa@rightlogo\empty\else
-        \includegraphics[height=20cm,width=15cm,keepaspectratio]{\impa@rightlogo}
+    \ifx\impa@leftlogo\empty\else
+        \includegraphics[height=25cm,width=25cm,keepaspectratio]{\impa@leftlogo}
     \fi
 \end{minipage}%
 \begin{minipage}[c][10cm][c]{0.6\linewidth}
     \centering
-    {\fontsize{90}{78}\selectfont\bfseries
-     \color{titlefgcolor}\@title\par}
+    {\fontsize{80}{78}\selectfont\bfseries
+    \color{titlefgcolor}\@title\par}
+
+    \ifx\impa@subtitle\empty\else
+    \vspace{0.3em}
+    {\fontsize{46}{44}\selectfont
+    \color{titlefgcolor}\itshape
+    \impa@subtitle\par}
+    \fi
     \vspace{0.6em}
     {\fontsize{50}{48}\selectfont
      \color{titlefgcolor}\inlinelist{\impa@authors}\par}
@@ -84,8 +91,8 @@
 \end{minipage}%
 \begin{minipage}[c][8cm][c]{0.2\linewidth}
     \centering
-    \ifx\impa@leftlogo\empty\else
-        \includegraphics[height=10cm,width=10cm,keepaspectratio]{\impa@leftlogo}
+    \ifx\impa@rightlogo\empty\else
+        \includegraphics[height=10cm,width=15cm,keepaspectratio]{\impa@rightlogo}
     \fi
 \end{minipage}%
 }%
