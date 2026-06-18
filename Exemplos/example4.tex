@@ -14,6 +14,7 @@
 \begin{document}
 \maketitle
 
+\useblockstyle{testStyle}
 \begin{columns}
 
 % ==========================================
@@ -26,16 +27,44 @@ Este é um exemplo de seção usando a classe ImpaTeXPoster.
 \lipsum[1]
 \end{postercard}
 
+
 \begin{postercard}[pink50, pink50, black, pink400,black]{Objetivo}
 Mostrar como usar diferentes cores no ambiente.
 
 \lipsum[2]
 \end{postercard}
 
+\block{Definition}{
+A space $X$ is compact if every open cover admits a finite subcover.
+}
+
+\block{}{
+The notion of compactness evolved during the nineteenth century.
+
+\lipsum[1-2]
+}
+
 % ==========================================
 % RIGHT COLUMN
 % ==========================================
 \column{0.5}
+
+\block{Proposition}{
+Every compact subset of a Hausdorff space is closed.
+
+\lipsum[3]
+}
+
+
+\block{Corollary}{
+Compact subsets of \(\mathbb{R}^n\) are closed and bounded.
+}
+
+\block{}{
+    Proof. \\
+    \lipsum[3]
+
+}
 
 \begin{postercard}[green50, green50, black, green400,black]{Resultados}
 \lipsum[3]
