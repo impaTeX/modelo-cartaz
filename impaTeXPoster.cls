@@ -110,18 +110,22 @@
 \RequirePackage{graphicx}
 
 % Logo esquerda
-\newcommand{\posterlogo}[1]{\def\impa@rightlogo{#1}}
-\def\impa@rightlogo{}
+\newcommand{\posterlogo}[1]{\def\impa@leftlogo{#1}}
+\def\impa@leftlogo{}
 
 % Logo direita
-\newcommand{\leftposterlogo}[1]{\def\impa@leftlogo{#1}}
-\def\impa@leftlogo{}
+\newcommand{\rightposterlogo}[1]{\def\impa@rightlogo{#1}}
+\def\impa@rightlogo{}
 
 % Autores e emails
 \renewcommand{\author}[1]{\def\impa@authors{#1}}
 \newcommand{\authoremail}[1]{\def\impa@emails{#1}}
 \def\impa@authors{}
 \def\impa@emails{}
+
+% Subtítulo
+\newcommand{\subtitle}[1]{\def\impa@subtitle{#1}}
+\def\impa@subtitle{}
 
 % ==================================================
 % 5. DEFINIÇÃO DE CORES (Paleta Maria)
@@ -287,25 +291,33 @@
 \makebox[\linewidth]{%
 \begin{minipage}[c][8cm][c]{0.2\linewidth}
     \centering
-    \ifx\impa@rightlogo\empty\else
-        \includegraphics[height=20cm,width=15cm,keepaspectratio]{\impa@rightlogo}
+    \ifx\impa@leftlogo\empty\else
+        \includegraphics[height=25cm,width=25cm,keepaspectratio]{\impa@leftlogo}
     \fi
 \end{minipage}%
 \begin{minipage}[c][10cm][c]{0.6\linewidth}
     \centering
     {\fontsize{80}{78}\selectfont\bfseries
-     \color{titlefgcolor}\@title\par}
+    \color{titlefgcolor}\@title\par}
+
+    \ifx\impa@subtitle\empty\else
+    \vspace{0.3em}
+    {\fontsize{46}{44}\selectfont
+    \color{titlefgcolor}\itshape
+    \impa@subtitle\par}
+    \fi
+
     \vspace{0.6em}
     {\fontsize{50}{48}\selectfont
-     \color{titlefgcolor}\inlinelist{\impa@authors}\par}
+    \color{titlefgcolor}\inlinelist{\impa@authors}\par}
     \vspace{0.3em}
     {\fontsize{30}{36}\selectfont\ttfamily
      \color{titlefgcolor}\inlinelist{\impa@emails}\par}
 \end{minipage}%
 \begin{minipage}[c][8cm][c]{0.2\linewidth}
     \centering
-    \ifx\impa@leftlogo\empty\else
-        \includegraphics[height=10cm,width=15cm,keepaspectratio]{\impa@leftlogo}
+    \ifx\impa@rightlogo\empty\else
+        \includegraphics[height=10cm,width=15cm,keepaspectratio]{\impa@rightlogo}
     \fi
 \end{minipage}%
 }%
