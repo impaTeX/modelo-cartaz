@@ -64,11 +64,19 @@
 {}
 
 % Bloco sem borda/fundo (para figuras soltas)
-\newcommand{\plainblock}[1]{
+\newcommand{\plainblock}[1]{%
     \begingroup
+
+    \let\oldblockstyle\TP@blockstyle
+
     \colorlet{blockbodybgcolor}{backgroundcolor}
     \colorlet{framecolor}{backgroundcolor}
+
+    \useblockstyle{plainStyle}
     \block{}{#1}
+
+    \global\let\TP@blockstyle\oldblockstyle
+
     \endgroup
 }
 

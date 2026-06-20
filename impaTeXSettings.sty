@@ -30,13 +30,12 @@
     bodyoffsety=0pt,            %
     bodyverticalshift=0pt,      %
     roundedcorners=0,           %
-    linewidth=1mm,              % largura do contorno
+    linewidth=0mm,              % largura do contorno
     titleinnersep=4mm,          % altura da barrinha de fundo do titulo em cada bloco
     bodyinnersep=5mm            %
 }{
-    % Desenho
     % Corpo
-    \draw[color=blocktitlebgcolor, fill=blockbodybgcolor, line width=\blocklinewidth, rounded corners=2mm]
+    \draw[color=blockbodybgcolor, fill=blockbodybgcolor, line width=\blocklinewidth, rounded corners=4mm]
         (blockbody.south west) rectangle (blockbody.north east);
     % Título
     \ifBlockHasTitle
@@ -45,4 +44,18 @@
     \fi
 }
 
+\defineblockstyle{plainStyle}{
+    % Parâmetros de posição
+    titlewidthscale=1,       %
+    bodywidthscale=1,           %
+    titlecenter,                %
+    titleoffsetx=0pt,           %
+    titleoffsety=4mm,           %
+    bodyoffsetx=0pt,            %
+    bodyoffsety=0pt,            %
+    bodyverticalshift=0pt,      %
+}{
+    \draw[color=blocktitlebgcolor, fill=blockbodybgcolor, line width=1mm, rounded corners=4mm]
+        (blockbody.south west) rectangle (blockbody.north east);
+}
 \endinput
