@@ -30,6 +30,32 @@
 
 
 % ==================================================
+% TAMANHO DAS LOGOS DO CABEÇALHO
+% ==================================================
+% Valores padrão (podem ser sobrescritos pelo usuário no .tex)
+\newlength{\impa@leftlogowidth}
+\newlength{\impa@leftlogoheight}
+\setlength{\impa@leftlogowidth}{25cm}
+\setlength{\impa@leftlogoheight}{25cm}
+
+\newlength{\impa@rightlogowidth}
+\newlength{\impa@rightlogoheight}
+\setlength{\impa@rightlogowidth}{15cm}
+\setlength{\impa@rightlogoheight}{10cm}
+
+% Uso no .tex: \leftlogosize{<width>}{<height>}
+\newcommand{\leftlogosize}[2]{%
+    \setlength{\impa@leftlogowidth}{#1}%
+    \setlength{\impa@leftlogoheight}{#2}%
+}
+
+% Uso no .tex: \rightlogosize{<width>}{<height>}
+\newcommand{\rightlogosize}[2]{%
+    \setlength{\impa@rightlogowidth}{#1}%
+    \setlength{\impa@rightlogoheight}{#2}%
+}
+
+% ==================================================
 % CABEÇALHO/TÍTULO
 % ==================================================
 \newcommand{\impa@sep}{\quad\textbullet\quad}
@@ -68,7 +94,7 @@
 \begin{minipage}[c][8cm][c]{0.2\linewidth}
     \centering
     \ifx\impa@leftlogo\empty\else
-        \includegraphics[height=25cm,width=25cm,keepaspectratio]{\impa@leftlogo}
+        \includegraphics[width=\impa@leftlogowidth,height=\impa@leftlogoheight,keepaspectratio]{\impa@leftlogo}
     \fi
 \end{minipage}%
 \begin{minipage}[c][10cm][c]{0.6\linewidth}
@@ -92,7 +118,7 @@
 \begin{minipage}[c][8cm][c]{0.2\linewidth}
     \centering
     \ifx\impa@rightlogo\empty\else
-        \includegraphics[height=10cm,width=15cm,keepaspectratio]{\impa@rightlogo}
+        \includegraphics[width=\impa@rightlogowidth,height=\impa@rightlogoheight,keepaspectratio]{\impa@rightlogo}
     \fi
 \end{minipage}%
 }%
